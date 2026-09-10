@@ -76,29 +76,29 @@ anova(loyn_lm)
 
 \  
 
-Before you go on, a short word about how we will report the results of our models for the rest of the course, because it differs a little from what you will most often see in print.
+Before you go on, a quick word about how we'll report the results of our models for the rest of the course, as it's a little different from what you'll usually see in print.
 
-Throughout these exercises you will see P values, and you will see them everywhere in the published literature, so it's important that you can read them. A P value answers one rather narrow question, and it's worth being precise about what that question is.
+You'll come across P values throughout these exercises, and you'll see them everywhere in the published literature, so you really do need to be able to read them. The thing is, a P value only answers one rather narrow question, so let's be clear about what that question actually is.
 
-Imagine that forest patch area had no effect whatsoever on bird abundance, and that we then repeated this whole study over and over again, each time going out and surveying a fresh sample of 67 patches. Purely through the luck of which patches we happened to land on, some of those studies would give us a slope close to zero and others would give us a surprisingly steep one. The P value is the proportion of those imaginary repeat studies that would produce a slope at least as far from zero as the one we actually got. (Notice something rather odd about that. The P value doesn't depend only on the slope we actually measured, it also counts every slope *more* extreme than ours, results which never happened and which we never saw. That is a genuine and long-standing criticism of P values, not a quirk of the way I've explained it here.)
+Imagine that forest patch area had no effect whatsoever on bird abundance, and that we then repeated this whole study over and over again, each time going out and surveying a fresh sample of 67 patches. Just through the luck of which patches we happened to land on, some of those studies would give us a slope close to zero and others would give us a surprisingly steep one. The P value is the proportion of those imaginary repeat studies that would give us a slope at least as far from zero as the one we actually got. (Odd, isn't it? The P value doesn't just depend on the slope we measured, it also counts every slope *more* extreme than ours, results which never happened and which nobody ever saw. That's a long standing criticism of P values, not a quirk of the way I've explained it here.)
 
-So a small P value is telling you that your data would be an unusual thing to see if there really were no effect. It does not tell you the probability that there is no effect, and it certainly doesn't tell you how big an effect is.
+So, a small P value tells you that your data would be an unusual thing to see if there really were no effect. It doesn't tell you the probability that there's no effect, and it certainly doesn't tell you how big an effect is.
 
-The 0.05 threshold is a convention, not a fact about nature. A result at P = 0.049 and a result at P = 0.051 are practically identical, and treating them as two different kinds of finding is a mistake that you will nevertheless see made regularly in print.
+And that 0.05 threshold? It's a convention, nothing more. A result at P = 0.049 and a result at P = 0.051 are practically identical, and treating them as two different kinds of finding is a mistake you'll see made in print all the time.
 
-Two consequences that we will hold to throughout this course:
+Two things we'll stick to for the rest of the course:
 
-1. **Lead with the estimate and its confidence interval, not with the test.** The interval tells you the size of the effect and how precisely you have measured it, which is what a reader actually needs to know.
+1. **Lead with the estimate and its confidence interval, not with the test.** The interval tells you the size of the effect and how precisely you've measured it, which is what a reader actually needs to know.
 
-2. **A large P value never means 'no difference'.** It means that you have not detected one, which might be because there is no difference, or because your study is too small or too noisy to see it. Look at the confidence interval: if it stretches from 'trivial' to 'enormous', then the honest conclusion is that you can't tell.
+2. **A large P value never means 'no difference'.** It means you haven't detected one, which might be because there's no difference, or because your study is too small or too noisy to see it. Have a look at the confidence interval. If it stretches from 'trivial' to 'enormous' then the honest answer is that you can't tell.
 
-None of this means that hypothesis tests are useless, or that you should stop using them. You will meet the threshold based style constantly when reading papers, so learn to read it fluently, and get into the habit of translating it into estimates and intervals in your own head as you go. (if you want to read more about P values and how to misinterpret them see [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/))
+None of this means hypothesis tests are useless, or that you should stop using them. You'll meet the threshold based style constantly when you're reading papers, so learn to read it fluently, but try to get into the habit of translating it into estimates and intervals in your head as you go. (if you want to read more about P values and how to misinterpret them see [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/))
 
 \  
 
 5\. Now display the table of parameter (coefficient) estimates using the `summary()` function on your model object. Again, make sure you understand the different components of this output and be sure to ask if in doubt. What are the estimates of the intercept and slope? Write down the word equation of this linear model including your parameter estimates (hint: think y = a + bx).
 
-Your estimates of the intercept and slope are just that, estimates. They come from a single sample of 67 forest patches and a different sample of patches would have given you slightly different values. To get a handle on how precisely each parameter has been estimated, use the `confint()` function on your model object to obtain the 95% confidence intervals for both the intercept and the slope. Now interpret the interval for the slope *in birds*: what range of values for the change in bird abundance per 1 unit increase in `LOGAREA` are these data reasonably consistent with? Keep this on the scale of the transformation, which is the scale the model was fitted on (a 1 unit increase in `LOGAREA` is a tenfold increase in patch area on the original scale, but we will come back to the original scale in Question 13).
+Don't forget, your estimates of the intercept and slope are just that, estimates. They come from a single sample of 67 forest patches and a different sample of patches would have given you slightly different values. To get a handle on how precisely each parameter has been estimated, use the `confint()` function on your model object to obtain the 95% confidence intervals for both the intercept and the slope. Now have a go at interpreting the interval for the slope *in birds*. What range of values for the change in bird abundance per 1 unit increase in `LOGAREA` are these data reasonably consistent with? Keep this on the scale of the transformation, which is the scale the model was fitted on (a 1 unit increase in `LOGAREA` is a tenfold increase in patch area on the original scale, but we'll come back to the original scale in Question 14).
 
 ```{r Q5, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
 summary(loyn_lm)
@@ -107,8 +107,8 @@ summary(loyn_lm)
 
 # word equation ABUND = 10.40 + 9.78 * LOGAREA
 
-# the estimates on their own tell you nothing about how precisely they have been
-# measured, so let's also get their 95% confidence intervals
+# the estimates on their own tell you nothing about how precisely we've measured them,
+# so let's also get their 95% confidence intervals
 confint(loyn_lm)
 
 # the 95% confidence interval for the slope is 7.76 to 11.81. In words, for every 1 unit
@@ -120,8 +120,8 @@ confint(loyn_lm)
 # notice that both ends of this interval describe a substantial effect (bird abundance
 # in these data ranges from 1.5 to 39.6 birds), so our ecological conclusion, that
 # forest patch area matters and matters a lot, holds right across the whole interval.
-# This is a well resolved result. You'll meet a much less well resolved one in the
-# linear model 3 exercise.
+# This one is nicely resolved. You'll meet a much messier one in the linear model 3
+# exercise.
 
 # the 95% confidence interval for the intercept is 8.05 to 12.76. The intercept is the
 # predicted bird abundance when LOGAREA = 0, which is a patch of 1 hectare (because
@@ -131,7 +131,7 @@ confint(loyn_lm)
 
 \  
 
-6\. What is the null hypothesis associated with the intercept? What is the null hypothesis associated with the slope? Do you reject or fail to reject these hypotheses? Now write those two findings out a second time, but in a completely different style: instead of saying which hypotheses you rejected, lead with the estimated values and their confidence intervals from Question 5. Put the two versions side by side. Which one tells a reader more, and what exactly does the second one tell them that the first one doesn't?
+6\. What is the null hypothesis associated with the intercept? What is the null hypothesis associated with the slope? Do you reject or fail to reject these hypotheses? Now write those two findings out a second time in a completely different style. Instead of saying which hypotheses you rejected, lead with the estimated values and their confidence intervals from Question 5. Put the two versions side by side. Which one tells a reader more, and what exactly does the second one tell them that the first one doesn't?
 
 ```{r Q6, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
 
@@ -150,14 +150,14 @@ confint(loyn_lm)
 # increase in patch area). In a one hectare patch we estimate a bird abundance of 10.41
 # birds (95% CI: 8.05 to 12.76).
 
-# Now compare the two. Version 1 tells a reader one thing only: that we were able to
+# Now compare the two. Version 1 tells a reader one thing only, that we were able to
 # detect these effects at all. Version 2 tells them by how much bird abundance changes,
-# in what units, and how precisely we have measured it.
+# in what units, and how precisely we've measured it.
 
-# That last part is the bit you can't get from version 1 at any price. A reader of
-# version 2 can see that the slope could plausibly be as low as 7.8 or as high as 11.8
-# birds, and can decide for themselves whether an effect of that size matters
-# ecologically. Version 1 gives them no way to ask that question.
+# You can't get that last part from version 1 at all. A reader of version 2 can see that
+# the slope could plausibly be as low as 7.8 or as high as 11.8 birds, and can decide
+# for themselves whether an effect of that size matters ecologically. Version 1 gives
+# them no way of asking that question.
 ```
 
 \  
@@ -185,12 +185,12 @@ summary(loyn_lm)
 # variables.
 
 # Here the two are 0.588 and 0.582, almost identical, because the penalty is tiny when
-# there is only one explanatory variable and 67 observations. For a simple model like
+# there's only one explanatory variable and 67 observations. For a simple model like
 # this one, quote the multiple R-squared and say which one it is. Once you get to the
 # multiple regression in exercise 4, report the adjusted value.
 
 # Whichever you quote, always say which. 'R-squared = 0.59' on its own is ambiguous, and
-# readers cannot check your arithmetic against a number they can't identify.
+# your reader can't check your arithmetic against a number they can't identify.
 
 # One word of caution that applies to both. R-squared measures how well the model fits
 # these data and nothing more. A high R-squared doesn't mean that the relationship is
@@ -266,7 +266,7 @@ my_data <- data.frame(LOGAREA = seq(from = min(loyn$LOGAREA),
                                   length = 50))
 
 # use predict function to calculate predicted values of abundance based on the new
-# LOGAREA values in the data frame my.data (use the newdata argument)
+# LOGAREA values in the data frame my_data (use the newdata argument)
 pred_vals <- predict(loyn_lm, newdata = my_data)
 ```
 
@@ -275,8 +275,8 @@ pred_vals <- predict(loyn_lm, newdata = my_data)
 11\. Now, use the `plot()` function to plot the relationship between bird abundance (`ABUND`) and your log transformed `AREA` variable. Also add some axes labels to aid interpretation of the plot. Once you've created the plot then add the fitted values calculated in Question 10 as a line on the plot (you will need to use the `lines()` function to do this but only after you have created the plot). 
 
 ```{r Q11, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
-# plot the lines on the plot. The x values are the new LOGAREA values from the my.data
-# dataframe, the predicted values are from pred.vals
+# plot the lines on the plot. The x values are the new LOGAREA values from the my_data
+# dataframe, the predicted values are from pred_vals
 plot(loyn$LOGAREA, loyn$ABUND, xlab = "Log10 Patch Area", 
      ylab = "Bird Abundance", ylim = c(0, 55))
 
@@ -299,7 +299,7 @@ ggplot(mapping = aes(x = LOGAREA, y = ABUND), data = loyn) +
 
 \  
 
-12\. Now let's recreate the plot you made in Question 11, but this time we'll add the 95% confidence intervals in addition to the fitted values. This question is worth spending some time on: the confidence band around the fitted line is simply the visual counterpart of the confidence intervals you calculated for the parameters back in Question 5, and it shows you at a glance how precisely this relationship has been estimated. Remember, you will need to use the `predict()` function again but this time include the`se.fit = TRUE` argument (store these new values in a new object called `pred_vals_se`). When you use the `se.fit = TRUE` argument with the `predict()` function the returned object will have a slightly different structure compared to when you used it before. Use the `str()` function on the `pred.vals.se` to take a look at the structure. See if you can figure out how to access the fitted values and the standard errors. Once you've got your head around this you can now use the `lines()` function three times to add the fitted values (as before) and also the upper and lower 95% confidence intervals. Don't forget, if you want the 95% confidence intervals then you will need to multiply your standard error values by the critical value of 1.96. If you need a reminder then take a look at the video on confidence intervals on the course MyAberdeen site (in the 'Introductory statistics lectures' folder which you can find in the 'Course Information' learning module).  
+12\. Now let's recreate the plot you made in Question 11, but this time we'll add the 95% confidence intervals in addition to the fitted values. Do spend a bit of time on this one. The confidence band around the fitted line is just the visual version of the confidence intervals you calculated for the parameters back in Question 5, and it shows you at a glance how precisely this relationship has been estimated. Remember, you will need to use the `predict()` function again but this time include the`se.fit = TRUE` argument (store these new values in a new object called `pred_vals_se`). When you use the `se.fit = TRUE` argument with the `predict()` function the returned object will have a slightly different structure compared to when you used it before. Use the `str()` function on `pred_vals_se` to take a look at the structure. See if you can figure out how to access the fitted values and the standard errors. Once you've got your head around this you can now use the `lines()` function three times to add the fitted values (as before) and also the upper and lower 95% confidence intervals. Don't forget, if you want the 95% confidence intervals then you will need to multiply your standard error values by the critical value of 1.96. If you need a reminder then take a look at the video on confidence intervals on the course MyAberdeen site (in the 'Introductory statistics lectures' folder which you can find in the 'Course Information' learning module).  
 
 ```{r Q12, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
 # note the use of the se.fit argument
@@ -312,8 +312,8 @@ pred_vals_se <- predict(loyn_lm, newdata = my_data, se.fit = TRUE)
 # $df = degrees of freedom
 # $residual.scale = residual standard error
 
-# so we will need to access our fitted values and standard errors using pred.val.se$fit
-# and pred.vals.se$se.fit respectively
+# so we will need to access our fitted values and standard errors using pred_vals_se$fit
+# and pred_vals_se$se.fit respectively
 str(pred_vals_se)
 
 # now create the plot
@@ -322,7 +322,7 @@ plot(x = loyn$LOGAREA, y = loyn$ABUND,
      ylab = "Bird abundance", ylim = c(0, 55))
     
 
-# add the fitted values as before but now we need to use pred.vals.se$fit
+# add the fitted values as before but now we need to use pred_vals_se$fit
 lines(my_data$LOGAREA, pred_vals_se$fit, lty = 1,col = "firebrick")
 
 # add the upper 95% confidence interval
@@ -345,9 +345,36 @@ ggplot(mapping = aes(x = LOGAREA, y = ABUND), data = loyn) +
 
 \  
 
-13\. This one is optional, so feel free to skip it if you've had enough (you can always find the R code for this question in the exercise solutions if you want to refer back to it at a later date). This time plot the relationship between bird abundance (`ABUND`) and the original untransformed `AREA` variable. Now back-transform your fitted values (remember you got these with the `predict()` function) to the original scale and add these to the plot as a line. Hint 1: you don't need to reuse the `predict()` function, you just need to back-transform your `my.data$LOGAREA` values. Hint 2: remember if you used a log~10~ transformation (`log10()`) then you can back-transform using `10^my.data$LOGAREA` and if you used a natural log transformation then use `exp(my.data$LOGAREA)` to back-transform. Comment on the differences between the plot on the transformed (log) scale and the plot on the back-transformed scale in your R script.
+13\. Right, time to write this analysis up. Everything you've worked out in this exercise would end up in your thesis as about three sentences, so let's have a go at writing them. I've given you the skeleton below and all you need to do is fill in the gaps using your output from Questions 2, 5 and 7. Don't worry about matching my wording exactly, there's no single right answer here.
 
-```{r Q13, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
+> Bird abundance increased with forest patch area. A linear model of bird abundance against log~10~ transformed patch area estimated an increase of ______ birds (95% CI: ______ to ______) for every 1 unit increase in log~10~ area, which is a tenfold increase in patch area (*F*~___,___~ = ______, *p* ______). The model explained ______% of the variation in bird abundance (*n* = ______ patches).
+
+```{r Q13, eval=SOLUTIONS, echo=SOLUTIONS, results=SOLUTIONS, collapse=TRUE}
+# Before you read mine, a health warning. This is how I'd write it up and it's one
+# reasonable version among many. Reporting conventions vary a fair bit between journals,
+# between subfields and between supervisors. What matters is that the estimate, its
+# uncertainty and the sample size are all in there, that you haven't claimed anything
+# the data don't support, and that somebody could reproduce what you did from what
+# you've written. Compare yours against mine, and against the papers you're reading.
+# Where they differ, ask yourself which is clearer and which is more honest.
+
+# Bird abundance increased with forest patch area. A linear model of bird abundance
+# against log10 transformed patch area estimated an increase of 9.78 birds (95% CI: 7.76
+# to 11.81) for every 1 unit increase in log10 area, which is a tenfold increase in
+# patch area (F 1,65 = 92.85, p < 0.001). The model explained 58.8% of the variation in
+# bird abundance (n = 67 patches).
+
+# Notice that two of those numbers didn't come from summary(). The confidence interval
+# came from confint() and you had to go and look the sample size up. Always give n. Two
+# studies reporting the same estimate with n = 67 and n = 6700 are not making the same
+# claim, and it's the confidence interval that gives the game away.
+```
+
+\  
+
+14\. This one is optional, so feel free to skip it if you've had enough (you can always find the R code for this question in the exercise solutions if you want to refer back to it at a later date). This time plot the relationship between bird abundance (`ABUND`) and the original untransformed `AREA` variable. Now back-transform your fitted values (remember you got these with the `predict()` function) to the original scale and add these to the plot as a line. Hint 1: you don't need to reuse the `predict()` function, you just need to back-transform your `my_data$LOGAREA` values. Hint 2: remember if you used a log~10~ transformation (`log10()`) then you can back-transform using `10^my_data$LOGAREA` and if you used a natural log transformation then use `exp(my_data$LOGAREA)` to back-transform. Comment on the differences between the plot on the transformed (log) scale and the plot on the back-transformed scale in your R script.
+
+```{r Q14, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
 # back transformed LOGAREA and 95% confidence intervals
 
 # re-plot but this time use the original untransformed AREA variable
@@ -370,46 +397,19 @@ lines(10^(my_data$LOGAREA), pred_vals_se$fit - (1.96 * pred_vals_se$se.fit),
 # this plot they're squashed against the left hand axis where they're easy to miss.
 
 # Notice the gap too. Patches run from 0.1 to 144 hectares and then jump to 973 and
-# 1771, so the right hand half of this plot rests on two points (the same two that had
-# high leverage in Q8) and the line across it is an assumption. You could restrict the
-# analysis to the smaller patches, which is defensible if your question is really about
-# small remnants, but it doesn't fix the misfit at the low end, the gap is much less
-# severe on the log10 scale the model is actually fitted on, and dropping data because a
-# plot looks wrong is a decision you would have to declare.
+# 1771, so the right hand half of this plot rests on just two points (the same two that
+# had high leverage in Q8) and the line across it is an assumption. You could restrict
+# the analysis to the smaller patches, which is defensible if your question is really
+# about small remnants, but it doesn't fix the poor fit at the low end, the gap is much
+# less severe on the log10 scale the model is actually fitted on, and dropping data
+# because a plot looks wrong is a decision you'd have to declare.
 
-# And the thing we promised back in Q5: the fitted line is straight on the log scale and
-# curved here, so there is no single 'birds per hectare' slope to quote. A hectare added
-# to a 1 hectare patch is worth about 2.9 birds, a hectare added to a 1000 hectare patch
-# about 0.004. What stays constant is the multiplicative step, 9.78 birds per tenfold
-# increase in area, which is why we reported the estimate per 1 unit of LOGAREA in Q5.
-```
-
-\  
-
-14\. Time to write up this analysis. Everything you've worked out in this exercise would end up in your thesis as about three sentences, so let's practice writing them. I've given you the skeleton below and all you need to do is fill in the gaps using your output from Questions 5, 7 and 12. Don't worry about matching my wording exactly, there's no single right answer here.
-
-> Bird abundance increased with forest patch area. A linear model of bird abundance against log~10~ transformed patch area estimated an increase of ______ birds (95% CI: ______ to ______) for every 1 unit increase in log~10~ area, which is a tenfold increase in patch area (*F*~___,___~ = ______, *p* ______). The model explained ______% of the variation in bird abundance (*n* = ______ patches).
-
-```{r Q14, eval=SOLUTIONS, echo=SOLUTIONS, results=SOLUTIONS, collapse=TRUE}
-# Before you read mine, a health warning. This is how I would write it up, and it's one
-# reasonable version among many. Reporting conventions vary a good deal between
-# journals, between subfields and between supervisors. What matters is that the
-# estimate, its uncertainty and the sample size are all in there, that you haven't
-# claimed anything the data don't support, and that somebody could reproduce what you
-# did from what you've written. Compare yours against mine, and against the papers
-# you're reading. Where they differ, ask yourself which is clearer and which is more
-# honest.
-
-# Bird abundance increased with forest patch area. A linear model of bird abundance
-# against log10 transformed patch area estimated an increase of 9.78 birds (95% CI: 7.76
-# to 11.81) for every 1 unit increase in log10 area, which is a tenfold increase in
-# patch area (F 1,65 = 92.85, p < 0.001). The model explained 58.8% of the variation in
-# bird abundance (n = 67 patches).
-
-# Notice that two of those numbers didn't come from summary(). The confidence interval
-# came from confint() and the sample size you had to go and look up. Always give n. Two
-# studies reporting the same estimate with n = 67 and n = 6700 are not making the same
-# claim, and it's the confidence interval that gives the game away.
+# And here's the thing we promised you back in Q5. The fitted line is straight on the
+# log scale but curved here, so there's no single 'birds per hectare' slope to quote. A
+# hectare added to a 1 hectare patch is worth about 2.9 birds, a hectare added to a 1000
+# hectare patch about 0.004. What stays the same is the multiplicative step, 9.78 birds
+# per tenfold increase in area, which is why we reported the estimate per 1 unit of
+# LOGAREA in Q5.
 ```
 
 \  

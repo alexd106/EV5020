@@ -1,5 +1,6 @@
 ## ----Q1, eval=SOLUTIONS, echo=SOLUTIONS, results=SOLUTIONS, collapse=TRUE----------------------------------------------------------------------------------------------
-loyn <- read.table("data/loyn.txt", header = TRUE)
+loyn <- read.table("data/loyn.txt", header = TRUE, 
+                   stringsAsFactors = TRUE)
 str(loyn)
 
 loyn$LOGAREA <- log10(loyn$AREA)
@@ -52,15 +53,15 @@ summary(M1)
 # No, not all of the P values are less than 0.05, which is what prompts us to simplify
 # the model over the next few questions.
 
-# As for the question about chance: at a 0.05 threshold you expect about 1 test in every
-# 20 to fall below it even when nothing at all is going on. So in a table of 14 tests
-# you would expect roughly one 'significant' result even if none of these variables
-# mattered in the slightest. Bear that in mind whenever somebody hands you a large table
-# of tests. A single starred coefficient in a table this size is weak evidence on its
-# own, and hunting through a big model for whatever happens to sit below 0.05 is a poor
-# way to do science.
+# And the question about chance? At a 0.05 threshold you expect about 1 test in every 20
+# to fall below it even when nothing at all is going on. So in a table of 14 tests you'd
+# expect roughly one 'significant' result even if none of these variables mattered in
+# the slightest. Bear that in mind whenever somebody hands you a big table of tests. A
+# single starred coefficient in a table this size is weak evidence on its own, and
+# hunting through a big model for whatever happens to sit below 0.05 is a poor way to do
+# science.
 
-# It's also part of the reason why the selection procedure we are about to use follows a
+# It's also part of the reason the selection procedure we're about to use follows a
 # stated rule, applied consistently, rather than picking out whatever happens to look
 # interesting.
 
@@ -154,7 +155,7 @@ drop1(M5, test = "F")
 # interaction.
 
 # Also note, because R always includes interactions *after* their main effects the P
-# value of the interaction term (p = 0.005) from the model selection is the same as P
+# value of the interaction term (p = 0.006) from the model selection is the same as P
 # value if we use the anova() function on our final model
 
 # Check this:
@@ -203,34 +204,33 @@ confint(M5)
 
 # The P values and confidence intervals printed for M5 are too optimistic.
 
-# They are calculated as if we had specified M5 in advance. We didn't. We fitted a 14
+# They're calculated as if we had specified M5 in advance. We didn't. We fitted a 14
 # parameter model and then dropped terms one at a time based on what these same data
 # told us. Selection kept exactly those terms that happened to look strongest in this
-# particular sample, so the surviving estimates are pushed away from zero and their
-# intervals are narrower than they should be.
+# particular sample, so the surviving estimates get pushed away from zero and their
+# intervals come out narrower than they should be.
 
-# This is called post-selection inference. There are ways of dealing with it, none of
-# which we'll cover here. What matters for you is that the problem exists, and that you
+# This is known as post-selection inference. There are ways of dealing with it, none of
+# which we'll cover here. What matters for you is that the problem exists and that you
 # say so plainly whenever you report a model you arrived at by selection. Most published
 # papers using stepwise selection don't.
 
-# One thing to be clear about before you go on. You will have noticed that the model we
-# ended up with here is the same one we fitted in the previous exercise. That is a
-# consequence of how I set these exercises up, not a finding. In the previous exercise I
-# simply told you to fit LOGAREA + FGRAZE + LOGAREA:FGRAZE, on the assumption that
-# this was the hypothesis the researchers set out to test, because it was the clearest
-# way to teach you what an interaction between a continuous and a categorical variable
-# looks like.
+# One thing to be clear about before you go on. You'll have noticed that the model we
+# ended up with here is the same one we fitted in the previous exercise. That's down to
+# how I set these exercises up, it's not a finding. In the previous exercise I simply
+# told you to fit LOGAREA + FGRAZE + LOGAREA:FGRAZE, on the assumption that this was the
+# hypothesis the researchers set out to test, because it was the clearest way to show
+# you what an interaction between a continuous and a categorical variable looks like.
 
-# So don't read anything into the two agreeing, and in your own work you would not fit
+# So don't read anything into the two agreeing, and in your own work you wouldn't fit
 # both and then compare them. You either specify a model in advance from your hypotheses
 # and report that, or you select one from the data and report the selection with the
-# caveat above. Doing both on the same data and picking whichever you prefer is the one
-# thing neither approach allows.
+# caveat above. Doing both on the same data and then picking whichever you prefer is the
+# one thing neither approach allows.
 
 
 ## ----Q12report, eval=SOLUTIONS, echo=SOLUTIONS, results=SOLUTIONS, collapse=TRUE---------------------------------------------------------------------------------------
-# Same health warning: my version, not the only version.
+# Same health warning. This is my version, not the only version.
 
 # METHODS. Bird abundance was modelled against log10 patch area, log10 distance to the
 # nearest patch, log10 distance to the nearest larger patch, year of isolation, altitude
@@ -249,22 +249,22 @@ confint(M5)
 
 # (that's about 150 words, so there was room to spare)
 
-# That last sentence is doing real work, so don't cut it. It is one of the two things
-# Q12 asked you to include, and without it a reader has no way of knowing that the model
-# was searched for rather than proposed. It costs you 20 words. If a supervisor or
-# reviewer tells you to drop it, ask them what the reader is supposed to do instead.
+# Don't cut that last sentence. It's one of the two things Q12 asked you to include, and
+# without it your reader has no way of knowing that the model was searched for rather
+# than proposed. It costs you 20 words. If a supervisor or reviewer tells you to drop
+# it, ask them what your reader is supposed to do instead.
 
-# Notice how much work the table did there. Without it you would have had to spell out
+# Notice how much the table did for us there. Without it you'd have had to spell out
 # every deletion and its P value in prose, which would eat most of your word limit and
-# be tedious to read. With it, one bracketed "(Table 1)" points the reader at the whole
-# selection history, and your text is free to say what the result actually means. This
-# is how model selection should be reported, and it is not how most papers do it.
+# be tedious to read. With it, one bracketed "(Table 1)" points your reader at the whole
+# selection history and your text is free to say what the result actually means. This is
+# how model selection should be reported, and it's not how most papers do it.
 
 # The two things a naive account would have left out are the selection history and that
-# last sentence. Without the history a reader can't tell how much searching went on, and
-# a model reported bare looks as though it was specified in advance on theoretical
+# last sentence. Without the history your reader can't tell how much searching went on,
+# and a model reported bare looks as though it was specified in advance on theoretical
 # grounds, which carries far more weight than one arrived at by trying things and
-# discarding them. Without the caveat they would take the P values at face value.
+# discarding them. Without the caveat they'd take the P values at face value.
 
 
 
@@ -273,8 +273,8 @@ confint(M5)
 # to select a model with the 'best' goodness of fit with the minimal number of estimated
 # parameters.
 
-# We will start with a reasonably complex but PLAUSABLE model (this is the same model we
-# started with using F test based model selection above.
+# We will start with a reasonably complex but PLAUSIBLE model (this is the same model we
+# started with using F test based model selection above).
 
 M.start.AIC<- lm(ABUND ~ LOGLDIST + LOGDIST + YR.ISOL + ALT + LOGAREA + FGRAZE +
                LOGAREA:FGRAZE, data = loyn)

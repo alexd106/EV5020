@@ -40,8 +40,8 @@ summary(loyn_lm)
 
 # word equation ABUND = 10.40 + 9.78 * LOGAREA
 
-# the estimates on their own tell you nothing about how precisely they have been
-# measured, so let's also get their 95% confidence intervals
+# the estimates on their own tell you nothing about how precisely we've measured them,
+# so let's also get their 95% confidence intervals
 confint(loyn_lm)
 
 # the 95% confidence interval for the slope is 7.76 to 11.81. In words, for every 1 unit
@@ -53,8 +53,8 @@ confint(loyn_lm)
 # notice that both ends of this interval describe a substantial effect (bird abundance
 # in these data ranges from 1.5 to 39.6 birds), so our ecological conclusion, that
 # forest patch area matters and matters a lot, holds right across the whole interval.
-# This is a well resolved result. You'll meet a much less well resolved one in the
-# linear model 3 exercise.
+# This one is nicely resolved. You'll meet a much messier one in the linear model 3
+# exercise.
 
 # the 95% confidence interval for the intercept is 8.05 to 12.76. The intercept is the
 # predicted bird abundance when LOGAREA = 0, which is a patch of 1 hectare (because
@@ -79,14 +79,14 @@ confint(loyn_lm)
 # increase in patch area). In a one hectare patch we estimate a bird abundance of 10.41
 # birds (95% CI: 8.05 to 12.76).
 
-# Now compare the two. Version 1 tells a reader one thing only: that we were able to
+# Now compare the two. Version 1 tells a reader one thing only, that we were able to
 # detect these effects at all. Version 2 tells them by how much bird abundance changes,
-# in what units, and how precisely we have measured it.
+# in what units, and how precisely we've measured it.
 
-# That last part is the bit you can't get from version 1 at any price. A reader of
-# version 2 can see that the slope could plausibly be as low as 7.8 or as high as 11.8
-# birds, and can decide for themselves whether an effect of that size matters
-# ecologically. Version 1 gives them no way to ask that question.
+# You can't get that last part from version 1 at all. A reader of version 2 can see that
+# the slope could plausibly be as low as 7.8 or as high as 11.8 birds, and can decide
+# for themselves whether an effect of that size matters ecologically. Version 1 gives
+# them no way of asking that question.
 
 
 ## ----Q7, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE-----------------------------------------------------------------------------------------------------------------
@@ -108,12 +108,12 @@ summary(loyn_lm)
 # variables.
 
 # Here the two are 0.588 and 0.582, almost identical, because the penalty is tiny when
-# there is only one explanatory variable and 67 observations. For a simple model like
+# there's only one explanatory variable and 67 observations. For a simple model like
 # this one, quote the multiple R-squared and say which one it is. Once you get to the
 # multiple regression in exercise 4, report the adjusted value.
 
 # Whichever you quote, always say which. 'R-squared = 0.59' on its own is ambiguous, and
-# readers cannot check your arithmetic against a number they can't identify.
+# your reader can't check your arithmetic against a number they can't identify.
 
 # One word of caution that applies to both. R-squared measures how well the model fits
 # these data and nothing more. A high R-squared doesn't mean that the relationship is
@@ -175,13 +175,13 @@ my_data <- data.frame(LOGAREA = seq(from = min(loyn$LOGAREA),
                                   length = 50))
 
 # use predict function to calculate predicted values of abundance based on the new
-# LOGAREA values in the data frame my.data (use the newdata argument)
+# LOGAREA values in the data frame my_data (use the newdata argument)
 pred_vals <- predict(loyn_lm, newdata = my_data)
 
 
 ## ----Q11, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE----------------------------------------------------------------------------------------------------------------
-# plot the lines on the plot. The x values are the new LOGAREA values from the my.data
-# dataframe, the predicted values are from pred.vals
+# plot the lines on the plot. The x values are the new LOGAREA values from the my_data
+# dataframe, the predicted values are from pred_vals
 plot(loyn$LOGAREA, loyn$ABUND, xlab = "Log10 Patch Area", 
      ylab = "Bird Abundance", ylim = c(0, 55))
 
@@ -213,8 +213,8 @@ pred_vals_se <- predict(loyn_lm, newdata = my_data, se.fit = TRUE)
 # $df = degrees of freedom
 # $residual.scale = residual standard error
 
-# so we will need to access our fitted values and standard errors using pred.val.se$fit
-# and pred.vals.se$se.fit respectively
+# so we will need to access our fitted values and standard errors using pred_vals_se$fit
+# and pred_vals_se$se.fit respectively
 str(pred_vals_se)
 
 # now create the plot
@@ -223,7 +223,7 @@ plot(x = loyn$LOGAREA, y = loyn$ABUND,
      ylab = "Bird abundance", ylim = c(0, 55))
     
 
-# add the fitted values as before but now we need to use pred.vals.se$fit
+# add the fitted values as before but now we need to use pred_vals_se$fit
 lines(my_data$LOGAREA, pred_vals_se$fit, lty = 1,col = "firebrick")
 
 # add the upper 95% confidence interval
@@ -244,7 +244,28 @@ ggplot(mapping = aes(x = LOGAREA, y = ABUND), data = loyn) +
     theme_classic()
 
 
-## ----Q13, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE----------------------------------------------------------------------------------------------------------------
+## ----Q13, eval=SOLUTIONS, echo=SOLUTIONS, results=SOLUTIONS, collapse=TRUE---------------------------------------------------------------------------------------------
+# Before you read mine, a health warning. This is how I'd write it up and it's one
+# reasonable version among many. Reporting conventions vary a fair bit between journals,
+# between subfields and between supervisors. What matters is that the estimate, its
+# uncertainty and the sample size are all in there, that you haven't claimed anything
+# the data don't support, and that somebody could reproduce what you did from what
+# you've written. Compare yours against mine, and against the papers you're reading.
+# Where they differ, ask yourself which is clearer and which is more honest.
+
+# Bird abundance increased with forest patch area. A linear model of bird abundance
+# against log10 transformed patch area estimated an increase of 9.78 birds (95% CI: 7.76
+# to 11.81) for every 1 unit increase in log10 area, which is a tenfold increase in
+# patch area (F 1,65 = 92.85, p < 0.001). The model explained 58.8% of the variation in
+# bird abundance (n = 67 patches).
+
+# Notice that two of those numbers didn't come from summary(). The confidence interval
+# came from confint() and you had to go and look the sample size up. Always give n. Two
+# studies reporting the same estimate with n = 67 and n = 6700 are not making the same
+# claim, and it's the confidence interval that gives the game away.
+
+
+## ----Q14, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE----------------------------------------------------------------------------------------------------------------
 # back transformed LOGAREA and 95% confidence intervals
 
 # re-plot but this time use the original untransformed AREA variable
@@ -267,38 +288,17 @@ lines(10^(my_data$LOGAREA), pred_vals_se$fit - (1.96 * pred_vals_se$se.fit),
 # this plot they're squashed against the left hand axis where they're easy to miss.
 
 # Notice the gap too. Patches run from 0.1 to 144 hectares and then jump to 973 and
-# 1771, so the right hand half of this plot rests on two points (the same two that had
-# high leverage in Q8) and the line across it is an assumption. You could restrict the
-# analysis to the smaller patches, which is defensible if your question is really about
-# small remnants, but it doesn't fix the misfit at the low end, the gap is much less
-# severe on the log10 scale the model is actually fitted on, and dropping data because a
-# plot looks wrong is a decision you would have to declare.
+# 1771, so the right hand half of this plot rests on just two points (the same two that
+# had high leverage in Q8) and the line across it is an assumption. You could restrict
+# the analysis to the smaller patches, which is defensible if your question is really
+# about small remnants, but it doesn't fix the poor fit at the low end, the gap is much
+# less severe on the log10 scale the model is actually fitted on, and dropping data
+# because a plot looks wrong is a decision you'd have to declare.
 
-# And the thing we promised back in Q5: the fitted line is straight on the log scale and
-# curved here, so there is no single 'birds per hectare' slope to quote. A hectare added
-# to a 1 hectare patch is worth about 2.9 birds, a hectare added to a 1000 hectare patch
-# about 0.004. What stays constant is the multiplicative step, 9.78 birds per tenfold
-# increase in area, which is why we reported the estimate per 1 unit of LOGAREA in Q5.
-
-
-## ----Q14, eval=SOLUTIONS, echo=SOLUTIONS, results=SOLUTIONS, collapse=TRUE---------------------------------------------------------------------------------------------
-# Before you read mine, a health warning. This is how I would write it up, and it's one
-# reasonable version among many. Reporting conventions vary a good deal between
-# journals, between subfields and between supervisors. What matters is that the
-# estimate, its uncertainty and the sample size are all in there, that you haven't
-# claimed anything the data don't support, and that somebody could reproduce what you
-# did from what you've written. Compare yours against mine, and against the papers
-# you're reading. Where they differ, ask yourself which is clearer and which is more
-# honest.
-
-# Bird abundance increased with forest patch area. A linear model of bird abundance
-# against log10 transformed patch area estimated an increase of 9.78 birds (95% CI: 7.76
-# to 11.81) for every 1 unit increase in log10 area, which is a tenfold increase in
-# patch area (F 1,65 = 92.85, p < 0.001). The model explained 58.8% of the variation in
-# bird abundance (n = 67 patches).
-
-# Notice that two of those numbers didn't come from summary(). The confidence interval
-# came from confint() and the sample size you had to go and look up. Always give n. Two
-# studies reporting the same estimate with n = 67 and n = 6700 are not making the same
-# claim, and it's the confidence interval that gives the game away.
+# And here's the thing we promised you back in Q5. The fitted line is straight on the
+# log scale but curved here, so there's no single 'birds per hectare' slope to quote. A
+# hectare added to a 1 hectare patch is worth about 2.9 birds, a hectare added to a 1000
+# hectare patch about 0.004. What stays the same is the multiplicative step, 9.78 birds
+# per tenfold increase in area, which is why we reported the estimate per 1 unit of
+# LOGAREA in Q5.
 

@@ -536,24 +536,25 @@ previously. Do any of the remaining variables need transforming
 (i.e.&#xA0;<code>AREA</code>, <code>DIST</code>, <code>LDIST</code>) or
 converting to a factor type variable (i.e.&#xA0;<code>GRAZE</code>)? Add the
 transformed variables to the <code>loyn</code> dataframe.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>loyn <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/loyn.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">str</span>(loyn)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## &apos;data.frame&apos;:    67 obs. of  8 variables:</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  $ SITE   : int  1 60 2 3 61 4 5 6 7 8 ...</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">##  $ ABUND  : num  5.3 10 2 1.5 13 17.1 13.8 14.1 3.8 2.2 ...</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">##  $ AREA   : num  0.1 0.2 0.5 0.5 0.6 1 1 1 1 1 ...</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">##  $ DIST   : int  39 142 234 104 191 66 246 234 467 284 ...</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">##  $ LDIST  : int  39 142 234 311 357 66 246 285 467 1829 ...</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">##  $ YR.ISOL: int  1968 1961 1920 1900 1957 1966 1918 1965 1955 1920 ...</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">##  $ GRAZE  : int  2 2 5 5 2 3 5 3 5 5 ...</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">##  $ ALT    : int  160 180 60 140 185 160 140 130 90 60 ...</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>loyn<span class="sc">$</span>LOGAREA <span class="ot">&lt;-</span> <span class="fu">log10</span>(loyn<span class="sc">$</span>AREA)</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>loyn<span class="sc">$</span>LOGDIST <span class="ot">&lt;-</span> <span class="fu">log10</span>(loyn<span class="sc">$</span>DIST)</span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>loyn<span class="sc">$</span>LOGLDIST <span class="ot">&lt;-</span> <span class="fu">log10</span>(loyn<span class="sc">$</span>LDIST)</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co"># create factor GRAZE as it was originally coded as an integer</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>loyn<span class="sc">$</span>FGRAZE <span class="ot">&lt;-</span> <span class="fu">factor</span>(loyn<span class="sc">$</span>GRAZE)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>loyn <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/loyn.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>                   <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">str</span>(loyn)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## &apos;data.frame&apos;:    67 obs. of  8 variables:</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">##  $ SITE   : int  1 60 2 3 61 4 5 6 7 8 ...</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">##  $ ABUND  : num  5.3 10 2 1.5 13 17.1 13.8 14.1 3.8 2.2 ...</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">##  $ AREA   : num  0.1 0.2 0.5 0.5 0.6 1 1 1 1 1 ...</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">##  $ DIST   : int  39 142 234 104 191 66 246 234 467 284 ...</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">##  $ LDIST  : int  39 142 234 311 357 66 246 285 467 1829 ...</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">##  $ YR.ISOL: int  1968 1961 1920 1900 1957 1966 1918 1965 1955 1920 ...</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">##  $ GRAZE  : int  2 2 5 5 2 3 5 3 5 5 ...</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">##  $ ALT    : int  160 180 60 140 185 160 140 130 90 60 ...</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>loyn<span class="sc">$</span>LOGAREA <span class="ot">&lt;-</span> <span class="fu">log10</span>(loyn<span class="sc">$</span>AREA)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>loyn<span class="sc">$</span>LOGDIST <span class="ot">&lt;-</span> <span class="fu">log10</span>(loyn<span class="sc">$</span>DIST)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>loyn<span class="sc">$</span>LOGLDIST <span class="ot">&lt;-</span> <span class="fu">log10</span>(loyn<span class="sc">$</span>LDIST)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co"># create factor GRAZE as it was originally coded as an integer</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>loyn<span class="sc">$</span>FGRAZE <span class="ot">&lt;-</span> <span class="fu">factor</span>(loyn<span class="sc">$</span>GRAZE)</span></code></pre></div>
 <p>&#xA0;</p>
 <p>2. Let&#x2019;s start with a very quick graphical exploration of any
 potential relationships between each explanatory variable (collinearity)
@@ -654,15 +655,15 @@ values would you still expect to fall below 0.05 purely by chance?</p>
 <span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="co"># No, not all of the P values are less than 0.05, which is what prompts us to simplify</span></span>
 <span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="co"># the model over the next few questions.</span></span>
 <span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="co"># As for the question about chance: at a 0.05 threshold you expect about 1 test in every</span></span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="co"># 20 to fall below it even when nothing at all is going on. So in a table of 14 tests</span></span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="co"># you would expect roughly one &apos;significant&apos; result even if none of these variables</span></span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="co"># mattered in the slightest. Bear that in mind whenever somebody hands you a large table</span></span>
-<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="co"># of tests. A single starred coefficient in a table this size is weak evidence on its</span></span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="co"># own, and hunting through a big model for whatever happens to sit below 0.05 is a poor</span></span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="co"># way to do science.</span></span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="co"># And the question about chance? At a 0.05 threshold you expect about 1 test in every 20</span></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="co"># to fall below it even when nothing at all is going on. So in a table of 14 tests you&apos;d</span></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="co"># expect roughly one &apos;significant&apos; result even if none of these variables mattered in</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="co"># the slightest. Bear that in mind whenever somebody hands you a big table of tests. A</span></span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="co"># single starred coefficient in a table this size is weak evidence on its own, and</span></span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="co"># hunting through a big model for whatever happens to sit below 0.05 is a poor way to do</span></span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="co"># science.</span></span>
 <span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a></span>
-<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="co"># It&apos;s also part of the reason why the selection procedure we are about to use follows a</span></span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="co"># It&apos;s also part of the reason the selection procedure we&apos;re about to use follows a</span></span>
 <span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a><span class="co"># stated rule, applied consistently, rather than picking out whatever happens to look</span></span>
 <span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="co"># interesting.</span></span></code></pre></div>
 <p>&#xA0;</p>
@@ -677,21 +678,21 @@ candidate for removal and why?</p>
 step?</p>
 <p>&#xA0;</p>
 <p><strong>A note on keeping track of model selection.</strong>
-Describing what you did during model selection is genuinely difficult to
-do well in writing, and it is done badly in the published literature
-more often than almost anything else on this course. Papers routinely
-say &#x201C;a minimum adequate model was obtained by backward selection&#x201D; and
-leave the reader with no idea what was in the starting model, what came
-out, in what order, or on what grounds.</p>
-<p>A summary table solves this, and it is worth seeing one being built
-rather than just being shown a finished one. So as we work through the
-deletions below I&#x2019;ll add a row to a table at each step, and you&#x2019;ll find
-it updated in the solution to each question. By the time we reach the
-end we&#x2019;ll have something that could go straight into a results section.
-You don&#x2019;t need to construct it yourself here, just follow along, but do
-consider making one like it when you report a model selection of your
-own.</p>
-<p>Here is the structure, with the starting model in it:</p>
+Describing what you did during model selection is a difficult thing to
+do well in writing, and it&#x2019;s done badly in the published literature more
+often than almost anything else on this course. Papers routinely say &#x201C;a
+minimum adequate model was obtained by backward selection&#x201D; and leave you
+with no idea what was in the starting model, what came out, in what
+order, or on what grounds.</p>
+<p>A summary table sorts this out, and I&#x2019;d rather show you one being
+built than just hand you the finished article. So, as we work through
+the deletions below I&#x2019;ll add a row to a table at each step and you&#x2019;ll
+find it updated in the solution to each question. By the time we get to
+the end we&#x2019;ll have something that could go straight into a results
+section. You don&#x2019;t need to build it yourself as you go, just follow
+along, but do think about making one like it when you report a model
+selection of your own.</p>
+<p>Here&#x2019;s the structure, with the starting model in it.</p>
 <p><strong>Table 1: Summary of model selection.</strong></p>
 <table>
 <colgroup>
@@ -725,13 +726,13 @@ LOGAREA:FGRAZE</td>
 </tbody>
 </table>
 <p>Two things about that first row. The starting model is in the table
-because a reader cannot judge a selection procedure without knowing what
-it started from: dropping four terms from a model of six is a very
+because your reader can&#x2019;t judge a selection procedure without knowing
+what it started from. Dropping four terms from a model of six is a very
 different exercise from dropping four from a model of twenty. And the
 <em>F</em> and <em>P</em> columns hold dashes because nothing was
-removed in order to arrive at M1. Those columns describe the deletion
-that got you from the previous model to this one, and for the first row
-there isn&#x2019;t one.</p>
+removed to arrive at M1. Those columns describe the deletion that got
+you from the previous model to this one, and for the first row there
+isn&#x2019;t one.</p>
 <p>&#xA0;</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Wait: why can&apos;t we use information from the &apos;summary(M1)&apos; or &apos;anova(M1)&apos; functions to</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># do this?</span></span>
@@ -1165,7 +1166,7 @@ think why this might be the case?</p>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># interaction.</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># Also note, because R always includes interactions *after* their main effects the P</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># value of the interaction term (p = 0.005) from the model selection is the same as P</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># value of the interaction term (p = 0.006) from the model selection is the same as P</span></span>
 <span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># value if we use the anova() function on our final model</span></span>
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
 <span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co"># Check this:</span></span>
@@ -1201,12 +1202,12 @@ of the parameter estimates and the interpretation of the hypotheses you
 are testing. As before, lead with the estimate and its confidence
 interval (<code>confint()</code>) and treat the P value as supporting
 evidence rather than as the finding (<a href="https://alexd106.github.io/EV5020/linear_model_1_exercise.html#pval_note">reminder</a>).</p>
-<p>There is also one caveat that applies to your final model here but
-did not apply to the model you fitted in the previous exercise, even
+<p>There&#x2019;s also one caveat that applies to your final model here but
+didn&#x2019;t apply to the model you fitted in the previous exercise, even
 though the two models are identical. Have a think about it before you
 look at the solutions. The P values and confidence intervals for your
 final model are calculated as though you had specified that model in
-advance. You didn&#x2019;t: you arrived at it by looking at these same data.
+advance. You didn&#x2019;t, you arrived at it by looking at these same data.
 Does that make them too optimistic, too conservative, or does it make no
 difference at all?</p>
 <p>&#xA0;</p>
@@ -1216,23 +1217,23 @@ patch areas or grazing intensities to these forests, they were measured
 as they were found. A linear model will happily estimate an effect of
 grazing on bird abundance, but it cannot tell you that grazing
 <em>causes</em> that change.</p>
-<p>Two things are worth keeping in mind. First, variables you didn&#x2019;t
-measure may be doing the work. Heavily grazed patches might also be the
-ones nearest roads, or on more fertile soil, or with a different
-understorey, and any of those could be the real driver of the difference
-in bird abundance.</p>
+<p>Two things to keep in mind here. First, variables you didn&#x2019;t measure
+may be doing the work. Heavily grazed patches might also be the ones
+nearest roads, or on more fertile soil, or with a different understorey,
+and any of those could be the real driver of the difference in bird
+abundance.</p>
 <p>Second, your explanatory variables are correlated with one another,
-as the pairs plot in Question 2 showed. That has a specific consequence
-for how you read the output: every estimate in your model is the effect
-of that variable <em>holding the other variables in the model
-constant</em>. Change which variables are in the model and the estimate
-changes, as you saw during model selection. So a coefficient is never
-simply &#x201C;the effect of grazing&#x201D;; it is the effect of grazing after
-accounting for whatever else you happened to include, and it will absorb
-some of the effect of any correlated variable you left out.</p>
+as the pairs plot in Question 2 showed. That changes how you read the
+output. Every estimate in your model is the effect of that variable
+<em>holding the other variables in the model constant</em>. Change which
+variables are in the model and the estimate changes, as you saw during
+model selection. So a coefficient is never simply &#x201C;the effect of
+grazing&#x201D;. It&#x2019;s the effect of grazing after accounting for whatever else
+you happened to include, and it will soak up some of the effect of any
+correlated variable you left out.</p>
 <p>None of this means observational studies aren&#x2019;t worth doing, and most
 of ecology is observational for perfectly good reasons. It does mean
-your language should match the evidence you actually have. &#x201C;Bird
+your language needs to match the evidence you actually have. &#x201C;Bird
 abundance was lower in more heavily grazed patches&#x201D; is supported by
 these data. &#x201C;Grazing reduces bird abundance&#x201D; is a stronger claim than a
 model like this one can carry on its own, and it needs experimental
@@ -1314,40 +1315,40 @@ evidence, or a well understood mechanism, standing behind it.</p>
 <span id="cb12-75"><a href="#cb12-75" tabindex="-1"></a></span>
 <span id="cb12-76"><a href="#cb12-76" tabindex="-1"></a><span class="co"># The P values and confidence intervals printed for M5 are too optimistic.</span></span>
 <span id="cb12-77"><a href="#cb12-77" tabindex="-1"></a></span>
-<span id="cb12-78"><a href="#cb12-78" tabindex="-1"></a><span class="co"># They are calculated as if we had specified M5 in advance. We didn&apos;t. We fitted a 14</span></span>
+<span id="cb12-78"><a href="#cb12-78" tabindex="-1"></a><span class="co"># They&apos;re calculated as if we had specified M5 in advance. We didn&apos;t. We fitted a 14</span></span>
 <span id="cb12-79"><a href="#cb12-79" tabindex="-1"></a><span class="co"># parameter model and then dropped terms one at a time based on what these same data</span></span>
 <span id="cb12-80"><a href="#cb12-80" tabindex="-1"></a><span class="co"># told us. Selection kept exactly those terms that happened to look strongest in this</span></span>
-<span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a><span class="co"># particular sample, so the surviving estimates are pushed away from zero and their</span></span>
-<span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a><span class="co"># intervals are narrower than they should be.</span></span>
+<span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a><span class="co"># particular sample, so the surviving estimates get pushed away from zero and their</span></span>
+<span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a><span class="co"># intervals come out narrower than they should be.</span></span>
 <span id="cb12-83"><a href="#cb12-83" tabindex="-1"></a></span>
-<span id="cb12-84"><a href="#cb12-84" tabindex="-1"></a><span class="co"># This is called post-selection inference. There are ways of dealing with it, none of</span></span>
-<span id="cb12-85"><a href="#cb12-85" tabindex="-1"></a><span class="co"># which we&apos;ll cover here. What matters for you is that the problem exists, and that you</span></span>
+<span id="cb12-84"><a href="#cb12-84" tabindex="-1"></a><span class="co"># This is known as post-selection inference. There are ways of dealing with it, none of</span></span>
+<span id="cb12-85"><a href="#cb12-85" tabindex="-1"></a><span class="co"># which we&apos;ll cover here. What matters for you is that the problem exists and that you</span></span>
 <span id="cb12-86"><a href="#cb12-86" tabindex="-1"></a><span class="co"># say so plainly whenever you report a model you arrived at by selection. Most published</span></span>
 <span id="cb12-87"><a href="#cb12-87" tabindex="-1"></a><span class="co"># papers using stepwise selection don&apos;t.</span></span>
 <span id="cb12-88"><a href="#cb12-88" tabindex="-1"></a></span>
-<span id="cb12-89"><a href="#cb12-89" tabindex="-1"></a><span class="co"># One thing to be clear about before you go on. You will have noticed that the model we</span></span>
-<span id="cb12-90"><a href="#cb12-90" tabindex="-1"></a><span class="co"># ended up with here is the same one we fitted in the previous exercise. That is a</span></span>
-<span id="cb12-91"><a href="#cb12-91" tabindex="-1"></a><span class="co"># consequence of how I set these exercises up, not a finding. In the previous exercise I</span></span>
-<span id="cb12-92"><a href="#cb12-92" tabindex="-1"></a><span class="co"># simply told you to fit LOGAREA + FGRAZE + LOGAREA:FGRAZE, on the assumption that</span></span>
-<span id="cb12-93"><a href="#cb12-93" tabindex="-1"></a><span class="co"># this was the hypothesis the researchers set out to test, because it was the clearest</span></span>
-<span id="cb12-94"><a href="#cb12-94" tabindex="-1"></a><span class="co"># way to teach you what an interaction between a continuous and a categorical variable</span></span>
-<span id="cb12-95"><a href="#cb12-95" tabindex="-1"></a><span class="co"># looks like.</span></span>
-<span id="cb12-96"><a href="#cb12-96" tabindex="-1"></a></span>
-<span id="cb12-97"><a href="#cb12-97" tabindex="-1"></a><span class="co"># So don&apos;t read anything into the two agreeing, and in your own work you would not fit</span></span>
-<span id="cb12-98"><a href="#cb12-98" tabindex="-1"></a><span class="co"># both and then compare them. You either specify a model in advance from your hypotheses</span></span>
-<span id="cb12-99"><a href="#cb12-99" tabindex="-1"></a><span class="co"># and report that, or you select one from the data and report the selection with the</span></span>
-<span id="cb12-100"><a href="#cb12-100" tabindex="-1"></a><span class="co"># caveat above. Doing both on the same data and picking whichever you prefer is the one</span></span>
-<span id="cb12-101"><a href="#cb12-101" tabindex="-1"></a><span class="co"># thing neither approach allows.</span></span></code></pre></div>
+<span id="cb12-89"><a href="#cb12-89" tabindex="-1"></a><span class="co"># One thing to be clear about before you go on. You&apos;ll have noticed that the model we</span></span>
+<span id="cb12-90"><a href="#cb12-90" tabindex="-1"></a><span class="co"># ended up with here is the same one we fitted in the previous exercise. That&apos;s down to</span></span>
+<span id="cb12-91"><a href="#cb12-91" tabindex="-1"></a><span class="co"># how I set these exercises up, it&apos;s not a finding. In the previous exercise I simply</span></span>
+<span id="cb12-92"><a href="#cb12-92" tabindex="-1"></a><span class="co"># told you to fit LOGAREA + FGRAZE + LOGAREA:FGRAZE, on the assumption that this was the</span></span>
+<span id="cb12-93"><a href="#cb12-93" tabindex="-1"></a><span class="co"># hypothesis the researchers set out to test, because it was the clearest way to show</span></span>
+<span id="cb12-94"><a href="#cb12-94" tabindex="-1"></a><span class="co"># you what an interaction between a continuous and a categorical variable looks like.</span></span>
+<span id="cb12-95"><a href="#cb12-95" tabindex="-1"></a></span>
+<span id="cb12-96"><a href="#cb12-96" tabindex="-1"></a><span class="co"># So don&apos;t read anything into the two agreeing, and in your own work you wouldn&apos;t fit</span></span>
+<span id="cb12-97"><a href="#cb12-97" tabindex="-1"></a><span class="co"># both and then compare them. You either specify a model in advance from your hypotheses</span></span>
+<span id="cb12-98"><a href="#cb12-98" tabindex="-1"></a><span class="co"># and report that, or you select one from the data and report the selection with the</span></span>
+<span id="cb12-99"><a href="#cb12-99" tabindex="-1"></a><span class="co"># caveat above. Doing both on the same data and then picking whichever you prefer is the</span></span>
+<span id="cb12-100"><a href="#cb12-100" tabindex="-1"></a><span class="co"># one thing neither approach allows.</span></span></code></pre></div>
 <p>&#xA0;</p>
-<p>12. Now for reporting your results, and this is the last write-up of
+<p>12. Now for reporting your results, and this is the last write up of
 the course. You arrived at your final model by a selection procedure,
 which brings a couple of reporting problems the previous three exercises
 didn&#x2019;t have.</p>
-<p>This is where the table you have been building since Question 5 earns
-its keep. Present it as a table in your results, exactly as you would in
-a paper, and then <strong>refer to it</strong> in your text rather than
-describing every deletion in prose. That is what the table is for: it
-carries the detail, so your paragraph can carry the argument.</p>
+<p>This is where that model selection table comes into its own. Build
+your own version of the one I&#x2019;ve been adding to in the solutions to
+Questions 5 to 9, present it as a table in your results exactly as you
+would in a paper, and then <strong>refer to it</strong> in your text
+rather than describing every deletion in prose. That&#x2019;s what the table is
+for. It carries the detail so your paragraph can carry the argument.</p>
 <p>Write <strong>no more than 200 words</strong> of accompanying text
 for the methods and results of a paper. Your reader is an ecologist who
 knows their stuff but isn&#x2019;t a statistician, and who wasn&#x2019;t in the room
@@ -1355,7 +1356,7 @@ while you did the analysis. They need to be able to work out from your
 text and your table exactly what you did and how much to trust it.
 Questions 4 and 11 have already told you the two things an honest
 account has to include that a naive one would leave out.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Same health warning: my version, not the only version.</span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Same health warning. This is my version, not the only version.</span></span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co"># METHODS. Bird abundance was modelled against log10 patch area, log10 distance to the</span></span>
 <span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># nearest patch, log10 distance to the nearest larger patch, year of isolation, altitude</span></span>
@@ -1374,22 +1375,22 @@ account has to include that a naive one would leave out.</p>
 <span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a></span>
 <span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co"># (that&apos;s about 150 words, so there was room to spare)</span></span>
 <span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a></span>
-<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co"># That last sentence is doing real work, so don&apos;t cut it. It is one of the two things</span></span>
-<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co"># Q12 asked you to include, and without it a reader has no way of knowing that the model</span></span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co"># was searched for rather than proposed. It costs you 20 words. If a supervisor or</span></span>
-<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co"># reviewer tells you to drop it, ask them what the reader is supposed to do instead.</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co"># Don&apos;t cut that last sentence. It&apos;s one of the two things Q12 asked you to include, and</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co"># without it your reader has no way of knowing that the model was searched for rather</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co"># than proposed. It costs you 20 words. If a supervisor or reviewer tells you to drop</span></span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co"># it, ask them what your reader is supposed to do instead.</span></span>
 <span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a></span>
-<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co"># Notice how much work the table did there. Without it you would have had to spell out</span></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co"># Notice how much the table did for us there. Without it you&apos;d have had to spell out</span></span>
 <span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co"># every deletion and its P value in prose, which would eat most of your word limit and</span></span>
-<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co"># be tedious to read. With it, one bracketed &quot;(Table 1)&quot; points the reader at the whole</span></span>
-<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co"># selection history, and your text is free to say what the result actually means. This</span></span>
-<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co"># is how model selection should be reported, and it is not how most papers do it.</span></span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co"># be tedious to read. With it, one bracketed &quot;(Table 1)&quot; points your reader at the whole</span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co"># selection history and your text is free to say what the result actually means. This is</span></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co"># how model selection should be reported, and it&apos;s not how most papers do it.</span></span>
 <span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a></span>
 <span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a><span class="co"># The two things a naive account would have left out are the selection history and that</span></span>
-<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a><span class="co"># last sentence. Without the history a reader can&apos;t tell how much searching went on, and</span></span>
-<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co"># a model reported bare looks as though it was specified in advance on theoretical</span></span>
+<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a><span class="co"># last sentence. Without the history your reader can&apos;t tell how much searching went on,</span></span>
+<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co"># and a model reported bare looks as though it was specified in advance on theoretical</span></span>
 <span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a><span class="co"># grounds, which carries far more weight than one arrived at by trying things and</span></span>
-<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co"># discarding them. Without the caveat they would take the P values at face value.</span></span></code></pre></div>
+<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co"># discarding them. Without the caveat they&apos;d take the P values at face value.</span></span></code></pre></div>
 <p>&#xA0;</p>
 <p><strong>OPTIONAL questions</strong> if you have time / energy /
 inclination!</p>
@@ -1404,36 +1405,36 @@ AIC with the <code>drop1()</code> function we need to omit the
 <code>test = &quot;F&quot;</code> argument)</p>
 <p>&#xA0;</p>
 <p><strong>A table again, and two ways of reading AIC.</strong> As with
-the <em>F</em> test route, I&#x2019;ll build a summary table as we go. Table 2
-has the same shape as Table 1, but with AIC in place of the <em>F</em>
-statistic and <em>P</em> value, and with two AIC columns rather than
-one. Those two columns carry the same evidence read in opposite
-directions, so it is worth being clear about them before you see any
+the <em>F</em> test route, I&#x2019;ll build a summary table in the solutions
+as we go. Table 2 has the same shape as Table 1, but with AIC in place
+of the <em>F</em> statistic and <em>P</em> value, and with two AIC
+columns rather than one. Those two columns carry the same evidence read
+in opposite directions, so let&#x2019;s be clear about them before you see any
 numbers.</p>
 <p><strong>AIC change</strong> is what happened to AIC when a term was
-deleted. This is the number the selection decision is actually based on,
-and it is what <code>drop1()</code> puts in front of you. A negative
+deleted. This is the number the selection decision is actually based on
+and it&#x2019;s what <code>drop1()</code> puts in front of you. A negative
 value means AIC fell when the term came out, so the simpler model was
 preferred.</p>
 <p><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC</strong> is the
-column you will see in published tables: each model&#x2019;s AIC minus the
+column you&#x2019;ll see in published tables, each model&#x2019;s AIC minus the
 <strong>lowest</strong> AIC in the set. The preferred model therefore
-has <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC = 0, and every other
-model has a positive value.</p>
-<p>Notice what that implies about <em>when</em> you can build the
-column. You cannot work out <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC
-until you know which model has the lowest AIC, and you don&#x2019;t know that
-until selection has finished. In practice, then, you would construct
-this table at the end and present it once. I am showing it growing row
-by row purely so you can see how it is assembled, and the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC values below are all calculated
-against the final best model, which is why none of the intermediate
-tables has a zero in that column.</p>
-<p>One more thing about presentation. I have put both AIC columns in
-here so that you can see the two readings side by side, but you would
+has <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC = 0 and every other model
+has a positive value.</p>
+<p>Notice what that means for <em>when</em> you can build the column.
+You can&#x2019;t work out <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC until you
+know which model has the lowest AIC, and you don&#x2019;t know that until
+selection has finished. So in practice you&#x2019;d put this table together at
+the end and present it once. I&#x2019;m showing it growing row by row purely so
+you can see how it&#x2019;s assembled, and the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC values in the solutions are all
+calculated against the final best model, which is why none of the
+intermediate tables has a zero in that column.</p>
+<p>One more thing about presentation. I&#x2019;ve put both AIC columns in here
+so you can see the two readings side by side, but you would
 <strong>not</strong> normally do that in a thesis or a paper. Pick one,
-and it is almost always <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC,
-because that is what readers expect and it does not depend on the order
-in which you happened to delete things.</p>
+and it&#x2019;s almost always <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC,
+because that&#x2019;s what readers expect and it doesn&#x2019;t depend on the order in
+which you happened to delete things.</p>
 <p>The usual rule of thumb (<a href="#refs">Burnham and Anderson
 2002</a>) applies to both columns, but reads differently in each:</p>
 <ul>
@@ -1447,15 +1448,15 @@ within 2 of the best has substantial support, one 4 to 7 above the best
 has considerably less, and one more than 10 above has essentially
 none.</li>
 </ul>
-<p><em>k</em>, in the third column, is simply the number of parameters
-the model estimates.</p>
+<p><em>k</em>, in the third column, is just the number of parameters the
+model estimates.</p>
 <p>&#xA0;</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># This time, we are not doing any specific hypothesis testing, rather we are attempting</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co"># to select a model with the &apos;best&apos; goodness of fit with the minimal number of estimated</span></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># parameters.</span></span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># We will start with a reasonably complex but PLAUSABLE model (this is the same model we</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co"># started with using F test based model selection above.</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># We will start with a reasonably complex but PLAUSIBLE model (this is the same model we</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co"># started with using F test based model selection above).</span></span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a></span>
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>M.start.AIC<span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> LOGLDIST <span class="sc">+</span> LOGDIST <span class="sc">+</span> YR.ISOL <span class="sc">+</span> ALT <span class="sc">+</span> LOGAREA <span class="sc">+</span> FGRAZE <span class="sc">+</span></span>
 <span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>               LOGAREA<span class="sc">:</span>FGRAZE, <span class="at">data =</span> loyn)</span>
@@ -1878,9 +1879,10 @@ based model selection approaches tend to favour more complicated minimum
 adequate models compared to <em>F</em> test based approaches.</p>
 <p>We don&#x2019;t need to re-validate or re-interpret the model, since we have
 already done this previously.</p>
-<p>You have already seen how to present this. Table 2 above is the AIC
-equivalent of Table 1, and either one can go straight into a results
-section with the text referring to it, exactly as in Question 12.</p>
+<p>You&#x2019;ve already seen how to present this. Table 2 in the solutions
+above is the AIC equivalent of Table 1, and either one can go straight
+into a results section with the text referring to it, exactly as in
+Question 12.</p>
 <p>A couple of practical notes if you build one of these for your own
 work. The AIC values reported by <code>drop1()</code> are not the same
 as those from the <code>AIC()</code> function, because the two calculate

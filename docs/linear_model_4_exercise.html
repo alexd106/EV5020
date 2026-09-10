@@ -470,21 +470,21 @@ candidate for removal and why?</p>
 step?</p>
 <p>&#xA0;</p>
 <p><strong>A note on keeping track of model selection.</strong>
-Describing what you did during model selection is genuinely difficult to
-do well in writing, and it is done badly in the published literature
-more often than almost anything else on this course. Papers routinely
-say &#x201C;a minimum adequate model was obtained by backward selection&#x201D; and
-leave the reader with no idea what was in the starting model, what came
-out, in what order, or on what grounds.</p>
-<p>A summary table solves this, and it is worth seeing one being built
-rather than just being shown a finished one. So as we work through the
-deletions below I&#x2019;ll add a row to a table at each step, and you&#x2019;ll find
-it updated in the solution to each question. By the time we reach the
-end we&#x2019;ll have something that could go straight into a results section.
-You don&#x2019;t need to construct it yourself here, just follow along, but do
-consider making one like it when you report a model selection of your
-own.</p>
-<p>Here is the structure, with the starting model in it:</p>
+Describing what you did during model selection is a difficult thing to
+do well in writing, and it&#x2019;s done badly in the published literature more
+often than almost anything else on this course. Papers routinely say &#x201C;a
+minimum adequate model was obtained by backward selection&#x201D; and leave you
+with no idea what was in the starting model, what came out, in what
+order, or on what grounds.</p>
+<p>A summary table sorts this out, and I&#x2019;d rather show you one being
+built than just hand you the finished article. So, as we work through
+the deletions below I&#x2019;ll add a row to a table at each step and you&#x2019;ll
+find it updated in the solution to each question. By the time we get to
+the end we&#x2019;ll have something that could go straight into a results
+section. You don&#x2019;t need to build it yourself as you go, just follow
+along, but do think about making one like it when you report a model
+selection of your own.</p>
+<p>Here&#x2019;s the structure, with the starting model in it.</p>
 <p><strong>Table 1: Summary of model selection.</strong></p>
 <table>
 <colgroup>
@@ -518,13 +518,13 @@ LOGAREA:FGRAZE</td>
 </tbody>
 </table>
 <p>Two things about that first row. The starting model is in the table
-because a reader cannot judge a selection procedure without knowing what
-it started from: dropping four terms from a model of six is a very
+because your reader can&#x2019;t judge a selection procedure without knowing
+what it started from. Dropping four terms from a model of six is a very
 different exercise from dropping four from a model of twenty. And the
 <em>F</em> and <em>P</em> columns hold dashes because nothing was
-removed in order to arrive at M1. Those columns describe the deletion
-that got you from the previous model to this one, and for the first row
-there isn&#x2019;t one.</p>
+removed to arrive at M1. Those columns describe the deletion that got
+you from the previous model to this one, and for the first row there
+isn&#x2019;t one.</p>
 <p>&#xA0;</p>
 <p>&#xA0;</p>
 <p>6. Update and refit your model and remove the least significant
@@ -564,12 +564,12 @@ of the parameter estimates and the interpretation of the hypotheses you
 are testing. As before, lead with the estimate and its confidence
 interval (<code>confint()</code>) and treat the P value as supporting
 evidence rather than as the finding (<a href="https://alexd106.github.io/EV5020/linear_model_1_exercise.html#pval_note">reminder</a>).</p>
-<p>There is also one caveat that applies to your final model here but
-did not apply to the model you fitted in the previous exercise, even
+<p>There&#x2019;s also one caveat that applies to your final model here but
+didn&#x2019;t apply to the model you fitted in the previous exercise, even
 though the two models are identical. Have a think about it before you
 look at the solutions. The P values and confidence intervals for your
 final model are calculated as though you had specified that model in
-advance. You didn&#x2019;t: you arrived at it by looking at these same data.
+advance. You didn&#x2019;t, you arrived at it by looking at these same data.
 Does that make them too optimistic, too conservative, or does it make no
 difference at all?</p>
 <p>&#xA0;</p>
@@ -579,37 +579,38 @@ patch areas or grazing intensities to these forests, they were measured
 as they were found. A linear model will happily estimate an effect of
 grazing on bird abundance, but it cannot tell you that grazing
 <em>causes</em> that change.</p>
-<p>Two things are worth keeping in mind. First, variables you didn&#x2019;t
-measure may be doing the work. Heavily grazed patches might also be the
-ones nearest roads, or on more fertile soil, or with a different
-understorey, and any of those could be the real driver of the difference
-in bird abundance.</p>
+<p>Two things to keep in mind here. First, variables you didn&#x2019;t measure
+may be doing the work. Heavily grazed patches might also be the ones
+nearest roads, or on more fertile soil, or with a different understorey,
+and any of those could be the real driver of the difference in bird
+abundance.</p>
 <p>Second, your explanatory variables are correlated with one another,
-as the pairs plot in Question 2 showed. That has a specific consequence
-for how you read the output: every estimate in your model is the effect
-of that variable <em>holding the other variables in the model
-constant</em>. Change which variables are in the model and the estimate
-changes, as you saw during model selection. So a coefficient is never
-simply &#x201C;the effect of grazing&#x201D;; it is the effect of grazing after
-accounting for whatever else you happened to include, and it will absorb
-some of the effect of any correlated variable you left out.</p>
+as the pairs plot in Question 2 showed. That changes how you read the
+output. Every estimate in your model is the effect of that variable
+<em>holding the other variables in the model constant</em>. Change which
+variables are in the model and the estimate changes, as you saw during
+model selection. So a coefficient is never simply &#x201C;the effect of
+grazing&#x201D;. It&#x2019;s the effect of grazing after accounting for whatever else
+you happened to include, and it will soak up some of the effect of any
+correlated variable you left out.</p>
 <p>None of this means observational studies aren&#x2019;t worth doing, and most
 of ecology is observational for perfectly good reasons. It does mean
-your language should match the evidence you actually have. &#x201C;Bird
+your language needs to match the evidence you actually have. &#x201C;Bird
 abundance was lower in more heavily grazed patches&#x201D; is supported by
 these data. &#x201C;Grazing reduces bird abundance&#x201D; is a stronger claim than a
 model like this one can carry on its own, and it needs experimental
 evidence, or a well understood mechanism, standing behind it.</p>
 <p>&#xA0;</p>
-<p>12. Now for reporting your results, and this is the last write-up of
+<p>12. Now for reporting your results, and this is the last write up of
 the course. You arrived at your final model by a selection procedure,
 which brings a couple of reporting problems the previous three exercises
 didn&#x2019;t have.</p>
-<p>This is where the table you have been building since Question 5 earns
-its keep. Present it as a table in your results, exactly as you would in
-a paper, and then <strong>refer to it</strong> in your text rather than
-describing every deletion in prose. That is what the table is for: it
-carries the detail, so your paragraph can carry the argument.</p>
+<p>This is where that model selection table comes into its own. Build
+your own version of the one I&#x2019;ve been adding to in the solutions to
+Questions 5 to 9, present it as a table in your results exactly as you
+would in a paper, and then <strong>refer to it</strong> in your text
+rather than describing every deletion in prose. That&#x2019;s what the table is
+for. It carries the detail so your paragraph can carry the argument.</p>
 <p>Write <strong>no more than 200 words</strong> of accompanying text
 for the methods and results of a paper. Your reader is an ecologist who
 knows their stuff but isn&#x2019;t a statistician, and who wasn&#x2019;t in the room
@@ -631,36 +632,36 @@ AIC with the <code>drop1()</code> function we need to omit the
 <code>test = &quot;F&quot;</code> argument)</p>
 <p>&#xA0;</p>
 <p><strong>A table again, and two ways of reading AIC.</strong> As with
-the <em>F</em> test route, I&#x2019;ll build a summary table as we go. Table 2
-has the same shape as Table 1, but with AIC in place of the <em>F</em>
-statistic and <em>P</em> value, and with two AIC columns rather than
-one. Those two columns carry the same evidence read in opposite
-directions, so it is worth being clear about them before you see any
+the <em>F</em> test route, I&#x2019;ll build a summary table in the solutions
+as we go. Table 2 has the same shape as Table 1, but with AIC in place
+of the <em>F</em> statistic and <em>P</em> value, and with two AIC
+columns rather than one. Those two columns carry the same evidence read
+in opposite directions, so let&#x2019;s be clear about them before you see any
 numbers.</p>
 <p><strong>AIC change</strong> is what happened to AIC when a term was
-deleted. This is the number the selection decision is actually based on,
-and it is what <code>drop1()</code> puts in front of you. A negative
+deleted. This is the number the selection decision is actually based on
+and it&#x2019;s what <code>drop1()</code> puts in front of you. A negative
 value means AIC fell when the term came out, so the simpler model was
 preferred.</p>
 <p><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC</strong> is the
-column you will see in published tables: each model&#x2019;s AIC minus the
+column you&#x2019;ll see in published tables, each model&#x2019;s AIC minus the
 <strong>lowest</strong> AIC in the set. The preferred model therefore
-has <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC = 0, and every other
-model has a positive value.</p>
-<p>Notice what that implies about <em>when</em> you can build the
-column. You cannot work out <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC
-until you know which model has the lowest AIC, and you don&#x2019;t know that
-until selection has finished. In practice, then, you would construct
-this table at the end and present it once. I am showing it growing row
-by row purely so you can see how it is assembled, and the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC values below are all calculated
-against the final best model, which is why none of the intermediate
-tables has a zero in that column.</p>
-<p>One more thing about presentation. I have put both AIC columns in
-here so that you can see the two readings side by side, but you would
+has <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC = 0 and every other model
+has a positive value.</p>
+<p>Notice what that means for <em>when</em> you can build the column.
+You can&#x2019;t work out <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC until you
+know which model has the lowest AIC, and you don&#x2019;t know that until
+selection has finished. So in practice you&#x2019;d put this table together at
+the end and present it once. I&#x2019;m showing it growing row by row purely so
+you can see how it&#x2019;s assembled, and the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC values in the solutions are all
+calculated against the final best model, which is why none of the
+intermediate tables has a zero in that column.</p>
+<p>One more thing about presentation. I&#x2019;ve put both AIC columns in here
+so you can see the two readings side by side, but you would
 <strong>not</strong> normally do that in a thesis or a paper. Pick one,
-and it is almost always <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC,
-because that is what readers expect and it does not depend on the order
-in which you happened to delete things.</p>
+and it&#x2019;s almost always <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">&#x394;</span></span></span></span>AIC,
+because that&#x2019;s what readers expect and it doesn&#x2019;t depend on the order in
+which you happened to delete things.</p>
 <p>The usual rule of thumb (<a href="#refs">Burnham and Anderson
 2002</a>) applies to both columns, but reads differently in each:</p>
 <ul>
@@ -674,8 +675,8 @@ within 2 of the best has substantial support, one 4 to 7 above the best
 has considerably less, and one more than 10 above has essentially
 none.</li>
 </ul>
-<p><em>k</em>, in the third column, is simply the number of parameters
-the model estimates.</p>
+<p><em>k</em>, in the third column, is just the number of parameters the
+model estimates.</p>
 <p>&#xA0;</p>
 <p>&#xA0;</p>
 <p>A2. Refit your model with the variable associated with the lowest AIC
@@ -699,9 +700,10 @@ based model selection approaches tend to favour more complicated minimum
 adequate models compared to <em>F</em> test based approaches.</p>
 <p>We don&#x2019;t need to re-validate or re-interpret the model, since we have
 already done this previously.</p>
-<p>You have already seen how to present this. Table 2 above is the AIC
-equivalent of Table 1, and either one can go straight into a results
-section with the text referring to it, exactly as in Question 12.</p>
+<p>You&#x2019;ve already seen how to present this. Table 2 in the solutions
+above is the AIC equivalent of Table 1, and either one can go straight
+into a results section with the text referring to it, exactly as in
+Question 12.</p>
 <p>A couple of practical notes if you build one of these for your own
 work. The AIC values reported by <code>drop1()</code> are not the same
 as those from the <code>AIC()</code> function, because the two calculate

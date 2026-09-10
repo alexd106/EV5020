@@ -406,52 +406,52 @@ take you through it.</p>
 <div id="pval_note" class="section level3">
 <h3>A note on P values and confidence intervals</h3>
 <p>&#xA0;</p>
-<p>Before you go on, a short word about how we will report the results
-of our models for the rest of the course, because it differs a little
-from what you will most often see in print.</p>
-<p>Throughout these exercises you will see P values, and you will see
-them everywhere in the published literature, so it&#x2019;s important that you
-can read them. A P value answers one rather narrow question, and it&#x2019;s
-worth being precise about what that question is.</p>
+<p>Before you go on, a quick word about how we&#x2019;ll report the results of
+our models for the rest of the course, as it&#x2019;s a little different from
+what you&#x2019;ll usually see in print.</p>
+<p>You&#x2019;ll come across P values throughout these exercises, and you&#x2019;ll
+see them everywhere in the published literature, so you really do need
+to be able to read them. The thing is, a P value only answers one rather
+narrow question, so let&#x2019;s be clear about what that question actually
+is.</p>
 <p>Imagine that forest patch area had no effect whatsoever on bird
 abundance, and that we then repeated this whole study over and over
 again, each time going out and surveying a fresh sample of 67 patches.
-Purely through the luck of which patches we happened to land on, some of
+Just through the luck of which patches we happened to land on, some of
 those studies would give us a slope close to zero and others would give
 us a surprisingly steep one. The P value is the proportion of those
-imaginary repeat studies that would produce a slope at least as far from
-zero as the one we actually got. (Notice something rather odd about
-that. The P value doesn&#x2019;t depend only on the slope we actually measured,
-it also counts every slope <em>more</em> extreme than ours, results
-which never happened and which we never saw. That is a genuine and
-long-standing criticism of P values, not a quirk of the way I&#x2019;ve
-explained it here.)</p>
-<p>So a small P value is telling you that your data would be an unusual
-thing to see if there really were no effect. It does not tell you the
-probability that there is no effect, and it certainly doesn&#x2019;t tell you
+imaginary repeat studies that would give us a slope at least as far from
+zero as the one we actually got. (Odd, isn&#x2019;t it? The P value doesn&#x2019;t
+just depend on the slope we measured, it also counts every slope
+<em>more</em> extreme than ours, results which never happened and which
+nobody ever saw. That&#x2019;s a long standing criticism of P values, not a
+quirk of the way I&#x2019;ve explained it here.)</p>
+<p>So, a small P value tells you that your data would be an unusual
+thing to see if there really were no effect. It doesn&#x2019;t tell you the
+probability that there&#x2019;s no effect, and it certainly doesn&#x2019;t tell you
 how big an effect is.</p>
-<p>The 0.05 threshold is a convention, not a fact about nature. A result
-at P = 0.049 and a result at P = 0.051 are practically identical, and
-treating them as two different kinds of finding is a mistake that you
-will nevertheless see made regularly in print.</p>
-<p>Two consequences that we will hold to throughout this course:</p>
+<p>And that 0.05 threshold? It&#x2019;s a convention, nothing more. A result at
+P = 0.049 and a result at P = 0.051 are practically identical, and
+treating them as two different kinds of finding is a mistake you&#x2019;ll see
+made in print all the time.</p>
+<p>Two things we&#x2019;ll stick to for the rest of the course:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Lead with the estimate and its confidence interval, not
 with the test.</strong> The interval tells you the size of the effect
-and how precisely you have measured it, which is what a reader actually
+and how precisely you&#x2019;ve measured it, which is what a reader actually
 needs to know.</p></li>
 <li><p><strong>A large P value never means &#x2018;no difference&#x2019;.</strong> It
-means that you have not detected one, which might be because there is no
+means you haven&#x2019;t detected one, which might be because there&#x2019;s no
 difference, or because your study is too small or too noisy to see it.
-Look at the confidence interval: if it stretches from &#x2018;trivial&#x2019; to
-&#x2018;enormous&#x2019;, then the honest conclusion is that you can&#x2019;t tell.</p></li>
+Have a look at the confidence interval. If it stretches from &#x2018;trivial&#x2019;
+to &#x2018;enormous&#x2019; then the honest answer is that you can&#x2019;t tell.</p></li>
 </ol>
-<p>None of this means that hypothesis tests are useless, or that you
-should stop using them. You will meet the threshold based style
-constantly when reading papers, so learn to read it fluently, and get
-into the habit of translating it into estimates and intervals in your
-own head as you go. (if you want to read more about P values and how to
-misinterpret them see <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/">here</a>)</p>
+<p>None of this means hypothesis tests are useless, or that you should
+stop using them. You&#x2019;ll meet the threshold based style constantly when
+you&#x2019;re reading papers, so learn to read it fluently, but try to get into
+the habit of translating it into estimates and intervals in your head as
+you go. (if you want to read more about P values and how to misinterpret
+them see <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/">here</a>)</p>
 <p>&#xA0;</p>
 <p>5. Now display the table of parameter (coefficient) estimates using
 the <code>summary()</code> function on your model object. Again, make
@@ -459,28 +459,28 @@ sure you understand the different components of this output and be sure
 to ask if in doubt. What are the estimates of the intercept and slope?
 Write down the word equation of this linear model including your
 parameter estimates (hint: think y = a + bx).</p>
-<p>Your estimates of the intercept and slope are just that, estimates.
-They come from a single sample of 67 forest patches and a different
-sample of patches would have given you slightly different values. To get
-a handle on how precisely each parameter has been estimated, use the
-<code>confint()</code> function on your model object to obtain the 95%
-confidence intervals for both the intercept and the slope. Now interpret
-the interval for the slope <em>in birds</em>: what range of values for
-the change in bird abundance per 1 unit increase in <code>LOGAREA</code>
-are these data reasonably consistent with? Keep this on the scale of the
-transformation, which is the scale the model was fitted on (a 1 unit
-increase in <code>LOGAREA</code> is a tenfold increase in patch area on
-the original scale, but we will come back to the original scale in
-Question 13).</p>
+<p>Don&#x2019;t forget, your estimates of the intercept and slope are just
+that, estimates. They come from a single sample of 67 forest patches and
+a different sample of patches would have given you slightly different
+values. To get a handle on how precisely each parameter has been
+estimated, use the <code>confint()</code> function on your model object
+to obtain the 95% confidence intervals for both the intercept and the
+slope. Now have a go at interpreting the interval for the slope <em>in
+birds</em>. What range of values for the change in bird abundance per 1
+unit increase in <code>LOGAREA</code> are these data reasonably
+consistent with? Keep this on the scale of the transformation, which is
+the scale the model was fitted on (a 1 unit increase in
+<code>LOGAREA</code> is a tenfold increase in patch area on the original
+scale, but we&#x2019;ll come back to the original scale in Question 14).</p>
 <p>&#xA0;</p>
 <p>6. What is the null hypothesis associated with the intercept? What is
 the null hypothesis associated with the slope? Do you reject or fail to
-reject these hypotheses? Now write those two findings out a second time,
-but in a completely different style: instead of saying which hypotheses
-you rejected, lead with the estimated values and their confidence
-intervals from Question 5. Put the two versions side by side. Which one
-tells a reader more, and what exactly does the second one tell them that
-the first one doesn&#x2019;t?</p>
+reject these hypotheses? Now write those two findings out a second time
+in a completely different style. Instead of saying which hypotheses you
+rejected, lead with the estimated values and their confidence intervals
+from Question 5. Put the two versions side by side. Which one tells a
+reader more, and what exactly does the second one tell them that the
+first one doesn&#x2019;t?</p>
 <p>&#xA0;</p>
 <p>7. Looking again at the output from the <code>summary()</code>
 function how much variation in bird abundance is explained by your log
@@ -532,52 +532,34 @@ you have created the plot).</p>
 <p>&#xA0;</p>
 <p>12. Now let&#x2019;s recreate the plot you made in Question 11, but this
 time we&#x2019;ll add the 95% confidence intervals in addition to the fitted
-values. This question is worth spending some time on: the confidence
-band around the fitted line is simply the visual counterpart of the
-confidence intervals you calculated for the parameters back in Question
-5, and it shows you at a glance how precisely this relationship has been
-estimated. Remember, you will need to use the <code>predict()</code>
-function again but this time include the<code>se.fit = TRUE</code>
-argument (store these new values in a new object called
-<code>pred_vals_se</code>). When you use the <code>se.fit = TRUE</code>
-argument with the <code>predict()</code> function the returned object
-will have a slightly different structure compared to when you used it
-before. Use the <code>str()</code> function on the
-<code>pred.vals.se</code> to take a look at the structure. See if you
-can figure out how to access the fitted values and the standard errors.
-Once you&#x2019;ve got your head around this you can now use the
-<code>lines()</code> function three times to add the fitted values (as
-before) and also the upper and lower 95% confidence intervals. Don&#x2019;t
-forget, if you want the 95% confidence intervals then you will need to
-multiply your standard error values by the critical value of 1.96. If
-you need a reminder then take a look at the video on confidence
-intervals on the course MyAberdeen site (in the &#x2018;Introductory statistics
-lectures&#x2019; folder which you can find in the &#x2018;Course Information&#x2019; learning
-module).</p>
+values. Do spend a bit of time on this one. The confidence band around
+the fitted line is just the visual version of the confidence intervals
+you calculated for the parameters back in Question 5, and it shows you
+at a glance how precisely this relationship has been estimated.
+Remember, you will need to use the <code>predict()</code> function again
+but this time include the<code>se.fit = TRUE</code> argument (store
+these new values in a new object called <code>pred_vals_se</code>). When
+you use the <code>se.fit = TRUE</code> argument with the
+<code>predict()</code> function the returned object will have a slightly
+different structure compared to when you used it before. Use the
+<code>str()</code> function on <code>pred_vals_se</code> to take a look
+at the structure. See if you can figure out how to access the fitted
+values and the standard errors. Once you&#x2019;ve got your head around this
+you can now use the <code>lines()</code> function three times to add the
+fitted values (as before) and also the upper and lower 95% confidence
+intervals. Don&#x2019;t forget, if you want the 95% confidence intervals then
+you will need to multiply your standard error values by the critical
+value of 1.96. If you need a reminder then take a look at the video on
+confidence intervals on the course MyAberdeen site (in the &#x2018;Introductory
+statistics lectures&#x2019; folder which you can find in the &#x2018;Course
+Information&#x2019; learning module).</p>
 <p>&#xA0;</p>
-<p>13. This one is optional, so feel free to skip it if you&#x2019;ve had
-enough (you can always find the R code for this question in the exercise
-solutions if you want to refer back to it at a later date). This time
-plot the relationship between bird abundance (<code>ABUND</code>) and
-the original untransformed <code>AREA</code> variable. Now
-back-transform your fitted values (remember you got these with the
-<code>predict()</code> function) to the original scale and add these to
-the plot as a line. Hint 1: you don&#x2019;t need to reuse the
-<code>predict()</code> function, you just need to back-transform your
-<code>my.data$LOGAREA</code> values. Hint 2: remember if you used a
-log<sub>10</sub> transformation (<code>log10()</code>) then you can
-back-transform using <code>10^my.data$LOGAREA</code> and if you used a
-natural log transformation then use <code>exp(my.data$LOGAREA)</code> to
-back-transform. Comment on the differences between the plot on the
-transformed (log) scale and the plot on the back-transformed scale in
-your R script.</p>
-<p>&#xA0;</p>
-<p>14. Time to write up this analysis. Everything you&#x2019;ve worked out in
-this exercise would end up in your thesis as about three sentences, so
-let&#x2019;s practice writing them. I&#x2019;ve given you the skeleton below and all
-you need to do is fill in the gaps using your output from Questions 5, 7
-and 12. Don&#x2019;t worry about matching my wording exactly, there&#x2019;s no single
-right answer here.</p>
+<p>13. Right, time to write this analysis up. Everything you&#x2019;ve worked
+out in this exercise would end up in your thesis as about three
+sentences, so let&#x2019;s have a go at writing them. I&#x2019;ve given you the
+skeleton below and all you need to do is fill in the gaps using your
+output from Questions 2, 5 and 7. Don&#x2019;t worry about matching my wording
+exactly, there&#x2019;s no single right answer here.</p>
 <blockquote>
 <p>Bird abundance increased with forest patch area. A linear model of
 bird abundance against log<sub>10</sub> transformed patch area estimated
@@ -587,6 +569,23 @@ area (<em>F</em><sub><strong><em>,</em></strong></sub> = ______,
 <em>p</em> ______). The model explained ______% of the variation in bird
 abundance (<em>n</em> = ______ patches).</p>
 </blockquote>
+<p>&#xA0;</p>
+<p>14. This one is optional, so feel free to skip it if you&#x2019;ve had
+enough (you can always find the R code for this question in the exercise
+solutions if you want to refer back to it at a later date). This time
+plot the relationship between bird abundance (<code>ABUND</code>) and
+the original untransformed <code>AREA</code> variable. Now
+back-transform your fitted values (remember you got these with the
+<code>predict()</code> function) to the original scale and add these to
+the plot as a line. Hint 1: you don&#x2019;t need to reuse the
+<code>predict()</code> function, you just need to back-transform your
+<code>my_data$LOGAREA</code> values. Hint 2: remember if you used a
+log<sub>10</sub> transformation (<code>log10()</code>) then you can
+back-transform using <code>10^my_data$LOGAREA</code> and if you used a
+natural log transformation then use <code>exp(my_data$LOGAREA)</code> to
+back-transform. Comment on the differences between the plot on the
+transformed (log) scale and the plot on the back-transformed scale in
+your R script.</p>
 <p>&#xA0;</p>
 <p>End of the linear model with single continuous explanatory variable
 exercise</p>

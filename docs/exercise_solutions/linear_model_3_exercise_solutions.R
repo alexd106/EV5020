@@ -73,9 +73,10 @@ abline(h = 0, lty = 2)
 
 # WHAT ARE WE LOOKING FOR HERE? Not an overall trend. If a variable is in the
 # model then least squares guarantees the residuals average out to zero against
-# it, so there is nothing to find on that score. Check it for yourself if you
-# like: cor(loyn$resid_inter, loyn$LOGAREA) is exactly 0, and the mean residual
-# is exactly 0 within every level of FGRAZE.
+# it, so there's nothing to find on that score. Check it for yourself if you
+# like. cor(loyn$resid_inter, loyn$LOGAREA) comes out as zero (near enough, R
+# will report something like -9.9e-18) and the mean residual is zero within
+# every level of FGRAZE.
 
 # What these plots CAN show you is shape and spread.
 
@@ -85,10 +86,10 @@ abline(h = 0, lty = 2)
 # Against FGRAZE: the middle of each box sits on zero, as it must, but the boxes
 # are not the same height. Graze level 3 is much more variable than graze levels
 # 2 and 4. The residual variances are 21.8, 10.3, 48.5, 6.1 and 12.0, so the
-# largest is about eight times the smallest. That is a hint that the homogeneity
+# largest is about eight times the smallest. That's a hint that the homogeneity
 # of variance assumption is shakier than the Scale-Location plot made it look.
-# Don't over-react to it though: with only 11 to 17 patches per level these
-# variance estimates are themselves quite imprecise.
+# Don't over-react to it though. With only 11 to 17 patches per level these
+# variance estimates are themselves pretty imprecise.
 
 
 ## ----Q6c, eval=SOLUTIONS, echo=SOLUTIONS, results=SOLUTIONS, collapse=TRUE---------------------------------------------------------------------------------------------
@@ -113,8 +114,8 @@ plot(resid_inter ~ ALT, data = loyn, pch = 16, ylab = "Residuals")
 abline(h = 0, lty = 2)
 
 # All four are patternless (the correlations are 0.02, -0.02, -0.03 and 0.11),
-# so nothing we have left out is crying out to be added. That is reassuring, and
-# it is worth remembering when we come to do formal model selection in the next
+# so nothing we've left out is crying out to be added. That's reassuring, and
+# well worth remembering when we come to do formal model selection in the next
 # exercise.
 
 
@@ -122,7 +123,7 @@ abline(h = 0, lty = 2)
 anova(birds_inter1)
 
 # The null hypothesis is that there is no significant interaction between FGRAZE and
-# LOGAREA. As the P value is smaller than our cutoff of 0.05 (p = 0.005) we reject the
+# LOGAREA. As the P value is smaller than our cutoff of 0.05 (p = 0.006) we reject the
 # null hypothesis and conclude that there is a significant interaction.
 
 # This means that there is a significant relationship between bird abundance and log
@@ -152,7 +153,7 @@ confint(birds_inter1)
 #   graze level 2 slope     =  4.14 +   4.27  =  8.41
 
 # Keep graze level 1's own slope of 4.14 in mind as you read on. Several of the
-# differences below are estimated against it, and they only make sense once you can see
+# differences below are measured against it and they only make sense once you can see
 # how small it is.
 
 # (Intercept) Here the Intercept (baseline) is the predicted ABUND when LOGAREA = 0, for
@@ -169,8 +170,8 @@ confint(birds_inter1)
 # This means that for a 1 unit increase in LOGAREA (i.e. a tenfold increase in patch
 # area) we get a corresponding increase of 4.14 birds on average (95% CI: 0.60 to 7.69
 # birds). As the P value (0.022) is < 0.05 we conclude that the slope is different from
-# 0. Notice how wide that interval is though: these data are consistent with anything
-# from a barely detectable increase of 0.6 birds up to a substantial 7.7 birds. We are
+# 0. Notice how wide that interval is though. These data are consistent with anything
+# from a barely detectable increase of 0.6 birds up to a substantial 7.7 birds. So we're
 # reasonably confident about the direction of this effect but not at all confident about
 # its size.
 
@@ -180,14 +181,15 @@ confint(birds_inter1)
 # +1.60, p = 0.118). The interval includes zero, so we fail to reject the null
 # hypothesis.
 
-# Stop there. Do NOT go on to say the two are 'the same'. Look at what this interval
-# still allows: anything from 13.7 fewer birds to 1.6 more. Nearly 14 fewer birds is a
-# bigger difference than the raw gap between these two grazing levels in the previous
-# exercise (9.2 birds), so it is not a small possibility we are dismissing.
+# Stop there though. Do NOT go on to say the two are 'the same'. Look at what this
+# interval still allows, anything from 13.7 fewer birds to 1.6 more. Nearly 14 fewer
+# birds is a bigger difference than the raw gap between these two grazing levels in the
+# previous exercise (9.2 birds), so this is not some small possibility we're brushing
+# aside.
 
-# With only 11 patches at graze level 2, this is a precision problem, not a null result.
-# The honest conclusion is 'these data can't tell us', and that is a perfectly
-# legitimate thing to report.
+# With only 11 patches at graze level 2 this is a precision problem, not a null result.
+# The honest conclusion is 'these data can't tell us', and that's a perfectly legitimate
+# thing to report.
 
 # FGRAZE3, FGRAZE4, FGRAZE5
 # Same interpretation as FGRAZE2: each is the difference in intercept from
@@ -197,15 +199,15 @@ confint(birds_inter1)
 # FGRAZE5: -17.04 birds (95% CI: -24.64 to -9.44, p < 0.001)
 # All three intervals lie entirely below zero, so here we do have clear
 # evidence of lower abundance than at graze level 1. But notice how wide they
-# still are. We know the direction and that all three reductions are
-# substantial; we do not know the size to better than about 15 birds either way.
+# still are. We know the direction, and that all three reductions are
+# substantial, but we don't know the size to better than about 15 birds either way.
 
 # FGRAZE2:LOGAREA This represents the difference in the slope of the relationship
 # between ABUND and LOGAREA between graze level 2 and graze level 1. The null hypothesis
 # is that the difference in slopes between graze level 1 and 2 = 0 (i.e. no difference).
 # The estimated difference in slopes is 4.27 (95% CI: -0.56 to 9.10, p = 0.082). The
 # interval includes zero, so no clear evidence that the slopes differ, and once again
-# that is not the same as saying they are the same. Graze level 1's own slope is only
+# that's not the same as saying they are the same. Graze level 1's own slope is only
 # 4.14, so an interval reaching 9.10 is consistent with graze level 2 responding to
 # patch area more than twice as steeply.
 
@@ -224,22 +226,22 @@ confint(birds_inter1)
 
 # FGRAZE5:LOGAREA The estimated difference in slopes between graze level 5 and graze
 # level 1 is 2.00 (95% CI: -4.30 to 8.29, p = 0.528). With a P value that unremarkable
-# it is very tempting to write this off as 'no difference'. But the interval runs from
+# it's very tempting to write this off as 'no difference'. But the interval runs from
 # 4.3 shallower than graze level 1's slope to 8.3 steeper, against a graze level 1 slope
 # of only 4.14. So these data are consistent with graze level 5 having essentially no
-# relationship with patch area, and equally consistent with it having one three times
-# steeper. We have learned almost nothing here, which is a very different statement from
-# having learned there is nothing there.
+# relationship with patch area, and just as consistent with it having one three times
+# steeper. We've learned almost nothing here, which is a very different thing from
+# having learned there's nothing there.
 
 # One general point before you move on. Parameters whose intervals exclude zero and
 # those whose intervals include it are not two different kinds of result. They sit on a
 # continuum of evidence. FGRAZE2:LOGAREA (p = 0.08) and FGRAZE3:LOGAREA (p = 0.005)
 # differ in degree, not in kind.
 
-# The Multiple R-square value is 0.79, so 79% of the variation in the data is explained
+# The Multiple R-square value is 0.80, so 80% of the variation in the data is explained
 # by the model. This is quite a bit more than the models with only LOGAREA and FGRAZE as
 # single explanatory variables. Remember though that R-squared tells you how well this
-# model fits these data, and nothing more than that.
+# model fits these data and nothing more than that.
 
 
 ## ----Q9a, eval=SOLUTIONS, echo=SOLUTIONS, collapse=FALSE---------------------------------------------------------------------------------------------------------------
@@ -314,15 +316,83 @@ legend("topleft",
 
 # Now, about those fitted lines for graze levels 1 and 2 (the black and red lines). They
 # are not on top of each other. The graze level 2 line starts lower and climbs more
-# steeply, and the two lines cross. That is precisely what the estimates in Question 8
-# said: an intercept 6.06 birds lower and a slope 4.27 steeper, which is the graze level
-# 2 row of the table you made in Q8 (intercept 15.18, slope 8.41). What the large P
-# values tell us is that we can't rule out the possibility that the two lines really are
+# steeply, and the two lines cross. That's exactly what the estimates in Question 8 told
+# us, an intercept 6.06 birds lower and a slope 4.27 steeper, which is the graze level 2
+# row of the table you made in Q8 (intercept 15.18, slope 8.41). What the large P values
+# tell us is that we can't rule out the possibility that the two lines really are
 # identical, given how few patches we have in graze level 2 (11 of them) and how much
 # scatter there is around each line. They do not tell us that the two lines ARE
 # identical, and the plot makes that difference easy to see. The estimated pattern is
-# right there in front of you; it just isn't estimated precisely enough for us to be
+# right there in front of you, it just isn't estimated precisely enough for us to be
 # sure of it.
+
+
+## ----Q10, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE----------------------------------------------------------------------------------------------------------------
+# Same health warning as before. This is my version, not the only version.
+
+# The relationship between bird abundance and forest patch area depended on grazing
+# intensity (interaction F 4,57 = 4.09, p = 0.006; adjusted R2 = 0.77, n = 67 patches).
+# Abundance increased with patch area at every grazing level, but the rate of increase
+# varied more than fourfold, from 4.1 birds per tenfold increase in area at the lowest
+# grazing intensity to 17.8 at grazing level 4 (Fig. 1). In a one hectare patch,
+# abundance at grazing level 2 was an estimated 6.1 birds lower than at level 1 (95% CI:
+# 13.7 lower to 1.6 higher) and its slope 4.3 steeper (95% CI: 0.6 shallower to 9.1
+# steeper). With only 11 patches at that grazing level these data cannot resolve either
+# comparison. Patch area therefore mattered least in the most lightly grazed patches,
+# which already held high numbers of birds even when small, and most at intermediate to
+# high grazing intensities. Residual spread differed among grazing levels (Q6), so the
+# intervals reported here should be treated as approximate.
+
+# Note that last sentence. We turned up a problem with the equal variance assumption
+# back in Q6 and then went ahead and reported the model anyway. That's fine, as long as
+# you tell your reader you did it. Finding something in your model validation and then
+# leaving it out of the write up is not fine.
+
+# Right, so what's going on in that paragraph? Let's take my three questions in turn.
+
+# 1. No, you can't write that sentence on its own, and this is the big one.
+
+#    Once you have an interaction in the model, "bird abundance increases with
+#    patch area" is only half a sentence, because HOW MUCH it increases depends
+#    on the grazing level. The honest version always carries the condition with
+#    it, something like "abundance increased with patch area at every grazing
+#    level, but the rate varied fourfold". Never let a main effect out on its
+#    own when it sits inside an interaction.
+
+# 2. Look at the two clauses in the middle of my paragraph.
+
+#    They give the estimate, they give the interval, and then they say plainly
+#    that we can't resolve the comparison. What they never do is claim the two
+#    grazing levels are the same. I've also told the reader WHY we can't
+#    resolve it (only 11 patches), which turns 'we don't know' from something
+#    that sounds like a failure into a useful piece of information about the
+#    study. "We cannot tell from these data" is a perfectly respectable result
+#    and it is perfectly publishable.
+
+# 3. No, and let's be clear about why not.
+
+#    It is NOT that the baseline is uninteresting. Graze level 1 is the lightest
+#    grazing intensity, so it's a perfectly sensible reference to compare the
+#    others against, and a reader will care about it. The problem is simply that
+#    ten numbers written out in prose is unreadable. Nobody can hold five
+#    intercepts and five slopes in their head from a block of text.
+
+#    So report the interaction test, the range of fitted slopes, the figure,
+#    and the adjusted R2 and n, then let your figure do the heavy lifting. If a
+#    journal wants the full coefficient table it goes in a supplement. Your
+#    figure from Q9 will always tell your reader more than the table does, as
+#    five fitted lines whose slopes visibly differ IS the finding.
+
+# Two last things I did on purpose, which you might want to copy.
+
+# I said 'adjusted R2' rather than just 'R2'. With 10 parameters the two differ
+# noticeably here (0.80 against 0.77), and your reader can't check your number if they
+# don't know which one you quoted.
+
+# I wrote 'per tenfold increase in area' rather than 'per unit log10 area'. Both are
+# correct, but only one of them means anything to an ecologist reading in a hurry.
+# Wherever you've transformed a variable, try to hand your reader the effect back on a
+# scale they can picture.
 
 
 ## ----Q9b, eval=SOLUTIONS, echo=SOLUTIONS, collapse=FALSE---------------------------------------------------------------------------------------------------------------
@@ -354,66 +424,4 @@ library(ggplot2)
 ggplot(loyn, aes(x = LOGAREA, y = ABUND, colour = FGRAZE) ) +
      geom_point() +
      geom_smooth(method = "lm", se = FALSE)
-
-
-## ----Q10, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE----------------------------------------------------------------------------------------------------------------
-# Same health warning as before: my version, not the only version.
-
-# The relationship between bird abundance and forest patch area depended on grazing
-# intensity (interaction F 4,57 = 4.09, p = 0.006; adjusted R2 = 0.77, n = 67 patches).
-# Abundance increased with patch area at every grazing level, but the rate of increase
-# varied more than fourfold, from 4.1 birds per tenfold increase in area at the lowest
-# grazing intensity to 17.8 at grazing level 4 (Fig. 1). In a one hectare patch,
-# abundance at grazing level 2 was an estimated 6.1 birds lower than at level 1 (95% CI:
-# 13.7 lower to 1.6 higher) and its slope 4.3 steeper (95% CI: 0.6 shallower to 9.1
-# steeper); with only 11 patches at that grazing level these data cannot resolve either
-# comparison. Patch area therefore mattered least in the most lightly grazed patches,
-# which already held high numbers of birds even when small, and most at intermediate to
-# high grazing intensities.
-
-# Right, so what's going on in that paragraph? Let's take my three questions in turn.
-
-# 1. No, you can't write that sentence on its own, and this is the big one.
-
-#    Once you have an interaction in the model, "bird abundance increases with
-#    patch area" is an incomplete sentence, because HOW MUCH it increases
-#    depends on the grazing level. The honest version always carries the
-#    condition with it: "abundance increased with patch area at every grazing
-#    level, but the rate varied fourfold". Get into the habit of never letting
-#    a main effect out on its own when it sits inside an interaction.
-
-# 2. Look at the two clauses in the middle of my paragraph.
-
-#    They give the estimate, they give the interval, and then they say plainly
-#    that we can't resolve the comparison. What they never do is claim the two
-#    grazing levels are the same. I've also told the reader WHY we can't
-#    resolve it (only 11 patches), which turns 'we don't know' from something
-#    that sounds like a failure into a useful piece of information about the
-#    study. "We cannot tell from these data" is a legitimate result and it is
-#    perfectly publishable.
-
-# 3. No, and it's worth being clear about why.
-
-#    It is NOT that the baseline is uninteresting. Graze level 1 is the lightest
-#    grazing intensity, so it's a perfectly sensible reference to compare the
-#    others against, and a reader will care about it. The problem is simply that
-#    ten numbers written out in prose is unreadable. Nobody can hold five
-#    intercepts and five slopes in their head from a block of text.
-
-#    So report the interaction test, the range of fitted slopes, the figure,
-#    and the adjusted R2 and n, then let your figure do the heavy lifting. If a
-#    journal wants the full coefficient table it goes in a supplement. Your
-#    figure from Q9 does far more work than the table ever will: five fitted
-#    lines whose slopes visibly differ IS the finding.
-
-# Two last things I did on purpose that are worth copying.
-
-# I said 'adjusted R2' rather than just 'R2'. With 10 parameters the two differ
-# noticeably here (0.80 against 0.77), and a reader can't check your number if they
-# don't know which one you quoted.
-
-# I wrote 'per tenfold increase in area' rather than 'per unit log10 area'. Both are
-# correct, but only one of them means anything to an ecologist reading quickly. Wherever
-# you've transformed a variable, try to hand the reader the effect back on a scale they
-# can picture.
 

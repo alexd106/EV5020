@@ -85,11 +85,11 @@ anova(birds_lm)
 # levels.
 
 # the summary statistics to report from this table are the F statistic with both of its
-# degrees of freedom, and the P value: F_4,62 = 14.98, p < 0.0001.
+# degrees of freedom, and the P value. So, F_4,62 = 14.98, p < 0.001.
 
-# note that this test tells you only that the five means are not all equal. It doesn't
+# note that this test only tells you that the five means are not all equal. It doesn't
 # tell you which levels differ, or by how much. That's what the rest of this exercise is
-# for, and you'll put the whole thing together into a written summary in Q12.
+# for, and you'll pull the whole thing together into a written summary in Q12.
 ```
 
 \  
@@ -116,23 +116,18 @@ summary(birds_lm)
 # now for the confidence intervals
 confint(birds_lm)
 
-# the far more useful thing to take from the intercept is the estimate itself together
-# with its interval: mean bird abundance in graze level 1 is estimated at 28.62 birds
-# (95% CI: 24.49 to 32.75 birds).
+# far more useful is the estimate itself along with its interval. Mean bird abundance in
+# graze level 1 is estimated at 28.62 birds (95% CI: 24.49 to 32.75 birds).
 
 # the remaining estimates are differences (contrasts) between each level and the
 # baseline. Let's report each one as an estimated difference with an interval, and leave
 # the P value until the end of the sentence where it belongs.
 
 # FGRAZE2: we estimate 9.20 fewer birds on average in graze level 2 than in graze level
-# 1
-# (95% CI: 15.30 fewer to 3.11 fewer birds, p = 0.004). The whole interval lies below
-# zero,
-# so we have clear evidence of a difference here. But notice how wide it is. A shortfall
-# of
-# 3 birds and a shortfall of 15 birds would mean rather different things ecologically,
-# and
-# with these data we can't distinguish between them.
+# 1 (95% CI: 15.30 fewer to 3.11 fewer birds, p = 0.004). The whole interval lies below
+# zero, so we have clear evidence of a difference here. But notice how wide it is. A
+# shortfall of 3 birds and a shortfall of 15 birds would mean rather different things
+# ecologically, and these data can't distinguish between them.
 
 # FGRAZE3: we estimate 8.46 fewer birds in graze level 3 than in graze level 1 (95% CI:
 # 13.94 fewer to 2.97 fewer birds, p = 0.003).
@@ -158,17 +153,17 @@ confint(birds_lm)
 # FGRAZE2 spans 12.20. So the graze 1 versus graze 3 difference is the best estimated of
 # the four, and graze 1 versus graze 2 the worst.
 
-# why? Each of these is a comparison between two groups, so its precision depends on how
-# much data there is in BOTH of them, not just one. Graze level 1 is the baseline and so
-# appears in all four comparisons, which means the thing that varies between them is the
-# size of the other group:
+# why? Each of these is a comparison between two groups, so how precise it is depends on
+# how much data you have in BOTH of them, not just one. Graze level 1 is the baseline
+# and so appears in all four comparisons, which means the only thing that varies between
+# them is the size of the other group
 table(loyn$FGRAZE)
 
 # graze level 3 has 17 patches, levels 4 and 5 have 13 each, and level 2 has only 11.
-# The comparison involving the largest group is the tightest, and the one involving the
-# smallest group is the loosest. Worth remembering when you are deciding how to spread
-# your effort in your own sampling: a comparison is only ever as good as the smaller of
-# the two groups going into it.
+# The comparison involving the largest group is the tightest and the one involving the
+# smallest group is the loosest. Something to bear in mind when you're deciding how to
+# spread your effort in your own sampling. A comparison is only ever as good as the
+# smaller of the two groups going into it.
 ```
 
 \  
@@ -206,14 +201,16 @@ confint(birds_lm4)
 
 # The intercept is now FGRAZE level 4, so we can compare '4 and 5'
 
-# Putting all ten pairwise differences together, with their intervals, the picture is:
-# level 1 sits well above the other four, level 5 sits well below the other four, and
-# levels 2, 3 and 4 cannot be separated from one another by these data.
+# and that's us finished. No need to relevel to graze level 5, as every pair has already
+# turned up in one of the four models above.
+
+# Putting all ten pairwise differences together with their intervals, the picture is
+# this. Level 1 sits well above the other four, level 5 sits well below the other four,
+# and levels 2, 3 and 4 can't be separated from one another by these data.
 
 # One important thing to notice as you work through these. Releveling doesn't change the
-# model at all: the fitted values, the residuals, the R^2 and the F test are all
-# identical every time. All that changes is which set of comparisons R chooses to show
-# you.
+# model at all. The fitted values, the residuals, the R^2 and the F test are identical
+# every time. All that changes is which set of comparisons R chooses to show you.
 
 # Check this for yourself in the confint() output above. The difference between graze
 # levels 2 and 3 is 0.75 birds (95% CI: -5.01 to 6.51) when level 2 is the baseline, and
@@ -226,8 +223,8 @@ confint(birds_lm4)
 9\. Staying with the summary table of parameter estimates, how much of the variation in bird abundance does the explanatory variable `FGRAZE` explain? As in the previous exercise, decide which of the two R^2^ values you should quote and why. This model estimates more parameters than the last one did, so is the gap between them bigger or smaller here? 
 
 ```{r Q9, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
-# The multiple R-squared value is 0.491 and therefore 49.1% of the variation in ABUND is
-# explained by FGRAZE
+# The multiple R-squared value is 0.4915 and therefore 49.2% of the variation in ABUND
+# is explained by FGRAZE
 
 # The adjusted R-squared is 0.459. Recall from the previous exercise that the adjusted
 # value penalises you for the number of parameters estimated, whereas the multiple
@@ -304,9 +301,11 @@ b) Looking at your plot, is it safe to conclude that two grazing levels differ w
 ```{r Q11a, eval=SOLUTIONS, echo=SOLUTIONS, collapse=FALSE}
 # using old faithful, the predict function, with base R graphics and the arrows function
 
-# back in Q8 we changed the baseline level a few times with relevel(). Let's put it back
-# to graze level 1 so everything below comes out in the natural order
-loyn$FGRAZE <- relevel(loyn$FGRAZE, ref = "1")
+# back in Q8 we changed the baseline level a few times with relevel(). One thing to be
+# careful of here. relevel() only moves one level to the front, so relevelling back to
+# "1" would leave us with the levels in the order 1, 4, 3, 2, 5. Just rebuild the factor
+# instead, so everything below comes out in the natural order
+loyn$FGRAZE <- factor(loyn$GRAZE)
 
 my_data <- data.frame(FGRAZE = c("1", "2", "3", "4", "5"))
 pred_vals <- predict(birds_lm, newdata = my_data, se.fit = TRUE)
@@ -328,11 +327,11 @@ points(1:5, pred_vals$fit, pch = 16)
 # They are 95% confidence intervals for the MEAN bird abundance within each of the five
 # grazing levels. There are five of them because there are five groups.
 
-# In Q7 you got only four intervals, from confint(). (Note that summary() never gives
-# you intervals at all, only estimates and standard errors. It is confint() that
-# turns those into intervals.) There were four because those are contrasts, i.e.
-# DIFFERENCES from the baseline, and a set of five groups has only four differences from
-# a baseline. Nothing has gone missing.
+# In Q7 you only got four intervals from confint(). (Note that summary() never gives you
+# intervals at all, only estimates and standard errors. It's confint() that turns those
+# into intervals.) There were four because those are contrasts, i.e. DIFFERENCES from
+# the baseline, and a set of five groups only has four differences from a baseline.
+# Nothing has gone missing.
 
 # here are the five group means and their intervals written out
 round(data.frame(FGRAZE = 1:5,
@@ -343,7 +342,7 @@ round(data.frame(FGRAZE = 1:5,
 # Take graze level 2. On this plot it is 19.42 birds (15.02 to 23.82). From confint() in
 # Q7, the FGRAZE2 contrast was -9.20 (-15.30 to -3.11).
 
-# Said carefully, in words:
+# Let's spell both of those out carefully in words.
 
 #   plot     : "the MEAN abundance of patches at graze level 2 is estimated at
 #              19.4 birds, and these data are consistent with a mean anywhere
@@ -354,23 +353,23 @@ round(data.frame(FGRAZE = 1:5,
 #              difference anywhere between 3.1 and 15.3 birds lower"
 
 # Note that both statements are about the MEAN of a group, not about individual patches.
-# A confidence interval of 15.0 to 23.8 does NOT say that 95% of graze level 2 patches
-# hold between 15 and 24 birds; plenty of individual patches sit well outside that
-# range, as you can see from the raw data. It says that the group AVERAGE is somewhere
-# in there. Getting this wrong is one of the most common errors in reporting, so it's
-# worth reading that sentence twice.
+# An interval of 15.0 to 23.8 does NOT say that 95% of graze level 2 patches hold
+# between 15 and 24 birds. Plenty of individual patches sit well outside that range, as
+# you can see from the raw data. It says the group AVERAGE is somewhere in there.
+# Getting this wrong is one of the most common errors in reporting, so read that
+# sentence twice.
 
 # Both statements are true and both are useful, but they answer different questions and
 # you must never quote one when you mean the other.
 
-# graze level 1 is the one place the two agree: 28.62 birds (24.57 to 32.67) here
+# graze level 1 is the one place the two agree. We get 28.62 birds (24.57 to 32.67) here
 # against an intercept of 28.62 (24.49 to 32.75) from confint(), because the intercept
-# IS the mean of graze level 1. The last-decimal difference is only because confint()
-# uses the t distribution with 62 degrees of freedom, a multiplier of 2.00, while our
-# plotting code above uses 1.96.
+# IS the mean of graze level 1. The last decimal differs only because confint() uses the
+# t distribution with 62 degrees of freedom, a multiplier of 2.00, while our plotting
+# code above uses 1.96.
 
 
-# (b) overlap, which is the one that really matters
+# (b) overlap, and this is the one that really matters
 
 # The rule works in one direction only.
 
@@ -383,20 +382,20 @@ round(data.frame(FGRAZE = 1:5,
 # those two means still has a confidence interval that comfortably excludes zero.
 
 # The reason is that the uncertainty in a difference is smaller than the two
-# uncertainties added together. So the interval for a difference is narrower than you
-# would guess by eye from looking at the two intervals for the means, and judging by
-# overlap alone makes you too cautious. You end up reporting 'no difference' for
-# comparisons that were perfectly well resolved.
+# uncertainties added together. So the interval for a difference is narrower than you'd
+# guess by eye from the two intervals for the means, and judging by overlap alone makes
+# you far too cautious. You end up reporting 'no difference' for comparisons that were
+# perfectly well resolved.
 
 # In these particular data the two views do happen to agree, and every pair of grazing
 # levels whose difference is clearly resolved also has non-overlapping intervals. Don't
-# take that as reassurance though, it's a coincidence of this dataset and not a rule.
+# take that as reassurance though, it's a fluke of this dataset and not a rule.
 
-# So what should you actually do? Use a plot like this to show a reader the overall
+# So what should you actually do? Use a plot like this to show your reader the overall
 # pattern, because it does that far better than a table of contrasts ever will. But when
-# you want to make a claim about one specific comparison, quote the confidence interval
-# for that DIFFERENCE, which is what Q7 gave you, and not the two intervals for the
-# means.
+# you want to make a claim about one particular comparison, quote the confidence
+# interval for that DIFFERENCE, which is what Q7 gave you, and not the two intervals for
+# the means.
 ```
 
 \  
@@ -413,7 +412,9 @@ plot(loyn_effects,"FGRAZE", lty = 0)
 ```
 
 ```{r Q11d, eval=SOLUTIONS, echo=SOLUTIONS, collapse=FALSE}
-# Option 2: using the ggplot2 package
+# Option 2: using the ggplot2 package. The mean_cl_normal function used below also needs
+# the Hmisc package installed (you don't need to load it, just install it)
+# install.packages('Hmisc')
 library(ggplot2) # make the functions in ggplot2 available
 
 # this plots the mean for each level of FGRAZE along with its 95% confidence interval
@@ -447,7 +448,7 @@ ggplot(loyn, aes(x = FGRAZE, y = ABUND)) +
 One thing to think about while you're writing. Your `confint()` output hands you four contrasts, all against graze level 1, and writing all four out in prose is tedious to read and buries the pattern. Have another look at your plot from Question 11. What is the pattern here, and can you get it across in a single sentence?
 
 ```{r Q12, eval=SOLUTIONS, echo=SOLUTIONS, collapse=TRUE}
-# Same health warning as the previous exercise: this is my version, not the only
+# Same health warning as the previous exercise. This is my version, not the only
 # version.
 
 # Mean bird abundance differed among the five grazing intensity levels (F 4,62 = 14.98,
@@ -456,14 +457,21 @@ One thing to think about while you're writing. Your `confint()` output hands you
 # birds), a difference of 22.3 birds (95% CI: 16.5 to 28.2). Grazing levels 2, 3 and 4
 # were similar to one another (means 19.4, 20.2 and 19.0 birds) and all sat roughly 8 to
 # 10 birds below level 1. The effect is therefore not a smooth decline across the
-# grazing gradient, it is concentrated at the highest grazing intensity. Grazing
-# intensity accounted for 49.2% of the variation in bird abundance.
+# grazing gradient, it's concentrated at the highest grazing intensity. Grazing
+# intensity accounted for 49.2% of the variation in bird abundance. The residual plots
+# in Question 10 showed that the variance was not equal across the five grazing levels,
+# so these intervals should be treated as approximate.
 
-# One thing I left out on purpose: the P value for the intercept (p < 2e-16). That tests
-# the hypothesis "there are no birds at all in the least grazed patches", which nobody
-# believed and nobody needed testing. A statistically impeccable result can still be
-# biologically pointless, and a fair part of writing up well is deciding what to leave
-# out.
+# That last sentence matters. We found a problem with the homogeneity of variance
+# assumption back in Q10 and then carried on and reported the model anyway, which is a
+# perfectly reasonable thing to do as long as you say so. What you must not do is find a
+# problem in your model validation and then quietly leave it out of the write up.
+
+# One thing I left out on purpose is the P value for the intercept (p < 2e-16). That
+# tests the hypothesis "there are no birds at all in the least grazed patches", which
+# nobody believed and nobody needed testing. A perfectly good statistical result can
+# still be biologically pointless, and a fair part of writing up well is deciding what
+# to leave out.
 ```
 
 \  
