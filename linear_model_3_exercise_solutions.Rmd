@@ -502,7 +502,7 @@ Three things I'd like you to get right, because they're the three that people mo
 
 \  
 
-**Two other ways of drawing the same plot.** Neither of these is examinable and you can happily skip them, but the code is here if you'd like it for your own work.
+**Two other ways of drawing the same plot.** Feel free to skip both of these, but the code is here if you'd like it for your own work.
 
 **(Optional, for the geeks)** Alternative method given in the solutions using a `for` loop. Just keep this code in case you ever want to do something like this in the future.
 
